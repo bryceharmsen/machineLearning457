@@ -6,9 +6,15 @@ import numpy as np
 # np.ones()
 
 class Perceptron(object):
-    def __init__(self, inputs, learningRate):
+    def __init__(self, inputs, learningRate, maxIterations):
         self.inputs = inputs
         self.learningRate = learningRate
+        self.maxIterations = maxIterations
+
+    def initialize(self, numInputs):
+        weights = [[]]
+        #randomly fill weight matrix
+        return weights
 
     def learn(self, weights, outputs, targets):
         for weights_i in weights:
@@ -22,3 +28,11 @@ class Perceptron(object):
         for weights_i in weights:
             outputs.append(np.dot(weights_i, self.inputs))
         return outputs
+    
+    def run(self):
+        #runs algorithm
+        weights = self.initialize(len(self.inputs))
+        #recall and learn will loop for some iterations
+        #or until fully learned
+        self.recall(weights)
+        #self.learn(weights, ... more here to figure out)
