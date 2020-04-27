@@ -29,7 +29,7 @@ class Perceptron(object):
             outputs.append(np.dot(weights_i, self.inputs))
         return outputs
     
-    def run(self):
+    def train(self):
         #runs algorithm
         weights = self.initialize(len(self.inputs))
         #recall and learn will loop for some iterations

@@ -12,6 +12,6 @@ inputs = []
 learningRate = 0.25
 maxIterations = 10
 percepter = Perceptron(inputs, learningRate, maxIterations)
-percepter.run()
+percepter.train()
 #display user results
 print('Provide output about perceptron learning results')
