@@ -12,7 +12,8 @@ class Perceptron(object):
         self.maxIterations = maxIterations
 
     def initialize(self, numInputs):
-        weights = [[]]
+        weights = np.random.rand(1,len(self.inputs[0]))
+        print 'weights: ', weights
         #randomly fill weight matrix
         return weights
 
@@ -21,12 +22,15 @@ class Perceptron(object):
             pass
             #do weights_i -= learningRate * (output - target) * input
             #for each row in weights?
+        print 'Do some learning here (adjust weights)'
         return weights
 
     def recall(self, weights):
         outputs = []
-        for weights_i in weights:
-            outputs.append(np.dot(weights_i, self.inputs))
+        for inputRow in self.inputs:
+            outputs.extend(list(np.dot(weights, np.transpose(inputRow))))
+        outputs = map(int, map(np.sign, outputs))
+        print 'recall outputs: ', outputs
         return outputs
     
     def train(self):

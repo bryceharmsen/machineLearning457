@@ -5,7 +5,7 @@
 import csv
 from perceptron import Perceptron
 
-#create and preprocess inputs
+# 1. create and preprocess inputs
 def preprocess(fileName):
     lists = []
     with open(fileName, 'rb') as csvFile:
@@ -25,10 +25,10 @@ supervisedLists = preprocess('supervisedData.csv')
 inputs = [value[1] for value in supervisedLists]
 targets = [value[0] for value in supervisedLists]
 print inputs, targets
-#pass inputs to the Perceptron
+# 2. pass inputs to the Perceptron
 learningRate = 0.25
 maxIterations = 10
 percepter = Perceptron(inputs, learningRate, maxIterations)
-#percepter.train()
-#display user results
+percepter.train()
+# 3. display user results
 print('Provide output about perceptron learning results')
