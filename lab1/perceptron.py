@@ -45,19 +45,24 @@ class Perceptron(object):
         self.categorize(self.targets)
         iteration = 0
         weights = self.initialize(len(self.inputs), len(self.inputs[0]))
-        while (iteration < self.maxIterations and np.sum(np.subtract(outputs, self.targets)) != 0):
+        lowestErrorCase = {'outputs': outputs, 'weights': weights}
+        minError = np.sum(np.subtract(outputs, self.targets))
+        error = minError
+        while (iteration < self.maxIterations and error > 0):
+            if error < minError:
+                lowestErrorCase['outputs'] = outputs
+                lowestErrorCase['weights'] = weights
+            outputs = self.recall(weights)
+            weights = self.learn(weights, outputs, self.targets)
+            error = abs(np.sum(np.subtract(outputs, self.targets)))
+            iteration += 1
             print 'iteration ', iteration
             print 'targets: ', self.targets
             print 'outputs: ', outputs
-            #recall and learn will loop for some iterations
-            #or until fully learned
-            outputs = self.recall(weights)
-            weights = self.learn(weights, outputs, self.targets)
-            iteration += 1
         if iteration == self.maxIterations:
             print 'Exit cause: maximum iterations reached'
-        elif np.sum(np.subtract(outputs, self.targets)) != 0:
+        elif np.sum(np.subtract(outputs, self.targets)) == 0:
             print 'Exit cause: outputs reached targets'
         else:
-            print 'Exit cause: error'
-        return weights, outputs
+            print 'Exit cause: unknown (this should not happen)'
+        return lowestErrorCase, weights, outputs

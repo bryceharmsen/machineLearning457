@@ -32,12 +32,18 @@ def buildConfusionMatrix(outputs, targets):
     falseNeg = 0
 
 params = getParams('params.yaml')
-supervisedLists = preprocess('supervisedData.csv')
+supervisedLists = preprocess(params['inputFile'])
 inputs = [value[1] for value in supervisedLists]
 targets = [value[0] for value in supervisedLists]
 
 # 2. pass inputs to the Perceptron
 percepter = Perceptron(inputs, targets, params['learningRate'], params['maxIterations'])
-percepter.train()
+lowestErrorCase, weights, outputs = percepter.train()
 # 3. display user results
-print('Provide output about perceptron learning results')
+print 'lowest error case: '
+#print '\tweights: ', lowestErrorCase['weights']
+print '\toutputs: ', lowestErrorCase['outputs']
+print 'last case: '
+#print '\tweights: ', weights
+print '\toutputs: ', outputs
+print 'Provide output about perceptron learning results'
