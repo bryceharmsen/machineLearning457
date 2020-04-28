@@ -1,0 +1,3 @@
+learningRate: 0.1
+maxIterations: 100
+inputFile: 'supervised3by3.csv'
