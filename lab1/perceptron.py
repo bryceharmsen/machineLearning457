@@ -49,16 +49,16 @@ class Perceptron(object):
         minError = np.sum(np.subtract(outputs, self.targets))
         error = minError
         while (iteration < self.maxIterations and error > 0):
-            if error < minError:
-                lowestErrorCase['outputs'] = outputs
-                lowestErrorCase['weights'] = weights
             outputs = self.recall(weights)
             weights = self.learn(weights, outputs, self.targets)
             error = abs(np.sum(np.subtract(outputs, self.targets)))
-            iteration += 1
+            if error < minError:
+                lowestErrorCase['outputs'] = outputs
+                lowestErrorCase['weights'] = weights
             print 'iteration ', iteration
             print 'targets: ', self.targets
             print 'outputs: ', outputs
+            iteration += 1
         if iteration == self.maxIterations:
             print 'Exit cause: maximum iterations reached'
         elif np.sum(np.subtract(outputs, self.targets)) == 0:
