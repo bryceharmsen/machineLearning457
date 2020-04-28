@@ -25,6 +25,12 @@ def preprocess(fileName):
                 currList.extend(list(map(int, row)))
     return lists
 
+def buildConfusionMatrix(outputs, targets):
+    truePos = 0
+    falsePos = 0
+    trueNeg = 0
+    falseNeg = 0
+
 params = getParams('params.yaml')
 supervisedLists = preprocess('supervisedData.csv')
 inputs = [value[1] for value in supervisedLists]
