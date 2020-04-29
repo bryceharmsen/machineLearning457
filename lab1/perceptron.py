@@ -8,6 +8,7 @@ class Perceptron(object):
         self.trainingPercentage = params['trainingPercentage']
         self.folds = params['folds']
         self.categorizedTarget = dict()
+        self.trainedWeights = list()
 
     def column(self, array, colIdx):
         return [row[colIdx] for row in array]
@@ -17,7 +18,8 @@ class Perceptron(object):
 
     def initialize(self, inputDim):
         weights = np.random.rand(inputDim)
-        weights = [w /2 for w in weights]
+        weights = [w * 0.4 + 0.1 for w in weights]
+        print(weights)
         return weights
 
     def learn(self, inputs, weights, outputs, targets):
@@ -56,17 +58,20 @@ class Perceptron(object):
         weights = self.initialize(len(inputs[0]))
         outputs = self.recall(inputs, weights)
         iteration = 0
-        lowestErrorCase = {'outputs': outputs, 'weights': weights}
-        minError = np.sum(np.subtract(outputs, targets))
-        error = minError
+        #lowestErrorCase = {'outputs': outputs, 'weights': weights}
+        #minError = np.sum(np.subtract(outputs, targets))
+        #error = minError
+        error = np.sum(np.subtract(outputs, targets))
+        errorEpochs = [error]
         while (iteration < self.maxIterations and error > 0):
             outputs = self.recall(inputs, weights)
             weights = self.learn(inputs, weights, outputs, targets)
             error = abs(np.sum(np.subtract(outputs, targets)))
-            if error < minError:
-                lowestErrorCase['outputs'] = outputs
-                lowestErrorCase['weights'] = weights
-                minError = error
+            errorEpochs.append(error)
+            #if error < minError:
+            #    lowestErrorCase['outputs'] = outputs
+            #    lowestErrorCase['weights'] = weights
+            #    minError = error
             print('iteration ', iteration)
             print('targets: ', targets)
             print('outputs: ', outputs)
@@ -77,10 +82,13 @@ class Perceptron(object):
             print('Exit cause: outputs matched targets')
         else:
             print('Exit cause: unknown (this should not happen)')
-        return lowestErrorCase, weights, outputs
+        #return lowestErrorCase, weights, outputs
+        return weights, outputs, errorEpochs
     
-    def test(self):
+    def test(self, inputs):
         """Tests the trained weight matrix for accuracy"""
+        for input in inputs:
+            pass
         pass
 
     def validate(self):
@@ -95,16 +103,17 @@ class Perceptron(object):
     def crossValidate(self, inputs, targets):
         """Validation"""
         self.appendExtraNodeTo(inputs)
-        chunks = self.splitIntoChunks(inputs, targets)        
+        chunks = self.splitIntoChunks(inputs, targets)   
         for i in range(self.folds):
             testChunk = chunks.pop()
             validationChunk = chunks.pop()
             trainingChunks = chunks
             #train
             flattenedChunk = sum(trainingChunks, [])
-            lowestErrorCase, weights, outputs = self.train([x[0] for x in flattenedChunk], [x[1] for x in flattenedChunk])
+            #lowestErrorCase, weights, outputs = self.train([x[0] for x in flattenedChunk], [x[1] for x in flattenedChunk])
+            weights, outputs, errorEpochs = self.train([x[0] for x in flattenedChunk], [x[1] for x in flattenedChunk])
             #test
-            self.test()
+            self.test(testChunk)
             #validate
             self.validate()
             #rotate and re-assemble chunks
