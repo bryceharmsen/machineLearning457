@@ -47,10 +47,10 @@ percepter = Perceptron(inputs,
 lowestErrorCase, finalWeights, finalOutputs = percepter.trainOnly()
 # 3. display user results
 print('lowest error case: ')
-#print '\tweights: ', lowestErrorCase['weights']
+print('\tweights: ', lowestErrorCase['weights'])
 print('\toutputs: ', lowestErrorCase['outputs'])
 print('last case: ')
-#print '\tweights: ', finalWeights
+print('\tweights: ', finalWeights)
 print('\toutputs: ', finalOutputs)
 print('\toutputs in context: ', percepter.contextualize(finalOutputs))
 print('targets: ', targets)

@@ -14,22 +14,20 @@ class Perceptron(object):
     def column(self, array, colIdx):
         return [row[colIdx] for row in array]
 
-    def initialize(self, numInputs, inputDimension):
-        weights = np.random.rand(numInputs, inputDimension)
-        weights = [[w /2 for w in row] for row in weights]
+    def initialize(self, inputDim):
+        weights = np.random.rand(inputDim)
+        weights = [w /2 for w in weights]
         return weights
 
     def learn(self, weights, outputs, targets):
-        for i in range(len(weights)):
-            if i > 0:
-                weights[i] = copy.deepcopy(weights[i - 1])
-            for j in range(len(weights[0])):
-                weights[i][j] -= self.learningRate * (outputs[i] - targets[i]) * self.inputs[i][j]
+        for i in range(len(self.inputs)):
+            for j in range(len(self.inputs[0])):
+                weights[j] -= self.learningRate * (outputs[i] - targets[i]) * self.inputs[i][j]
         return weights
 
     def recall(self, weights):
         inputs_T = np.transpose(self.inputs)
-        outputs = [np.dot(weights[i], self.column(inputs_T,i)) for i in range(len(weights))]
+        outputs = [np.dot(weights, self.column(inputs_T,i)) for i in range(len(inputs_T[0]))]
         outputs = list(map(int, map(np.sign, outputs)))
         return outputs
     
@@ -54,7 +52,7 @@ class Perceptron(object):
     def train(self, inputs, targets):
         """Trains the weights using inputs and targets provided in the constructor"""
         targets = self.categorize(targets)
-        weights = self.initialize(len(inputs), len(inputs[0]))
+        weights = self.initialize(len(inputs[0]))
         outputs = self.recall(weights)
         iteration = 0
         lowestErrorCase = {'outputs': outputs, 'weights': weights}
