@@ -9,7 +9,7 @@ class Perceptron(object):
         self.maxIterations = maxIterations
         self.trainingPercentage = trainingPercentage
         self.folds = folds
-        self.categorizedTarget = {}
+        self.categorizedTarget = dict()
 
     def column(self, array, colIdx):
         return [row[colIdx] for row in array]
@@ -32,7 +32,7 @@ class Perceptron(object):
         return outputs
     
     def categorize(self, targets):
-        newTargets = []
+        newTargets = list()
         categories = [-1, 1]
         for i in range(len(targets)):
             if not self.categorizedTarget.get(targets[i]):
@@ -41,7 +41,7 @@ class Perceptron(object):
         return newTargets
     
     def contextualize(self, outputs):
-        contextualizedOutput = {}
+        contextualizedOutput = dict()
         for key, value in self.categorizedTarget.items():
             if value in contextualizedOutput:
                 contextualizedOutput[value].append(key)
@@ -73,7 +73,7 @@ class Perceptron(object):
         if iteration == self.maxIterations:
             print('Exit cause: maximum iterations reached')
         elif np.sum(np.subtract(outputs, targets)) == 0:
-            print('Exit cause: outputs reached targets')
+            print('Exit cause: outputs matched targets')
         else:
             print('Exit cause: unknown (this should not happen)')
         return lowestErrorCase, weights, outputs
