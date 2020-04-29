@@ -28,14 +28,14 @@ class Perceptron(object):
     def recall(self, weights):
         inputs_T = np.transpose(self.inputs)
         outputs = [np.dot(weights[i], self.column(inputs_T,i)) for i in range(len(weights))]
-        outputs = map(int, map(np.sign, outputs))
+        outputs = list(map(int, map(np.sign, outputs)))
         return outputs
     
     def categorize(self, targets):
         newTargets = []
         categories = [-1, 1]
         for i in range(len(targets)):
-            if not self.categorizedTarget.has_key(targets[i]):
+            if not self.categorizedTarget.get(targets[i]):
                 self.categorizedTarget[targets[i]] = categories.pop()
             newTargets.append(self.categorizedTarget.get(targets[i]))
         return newTargets
@@ -65,14 +65,14 @@ class Perceptron(object):
                 lowestErrorCase['outputs'] = outputs
                 lowestErrorCase['weights'] = weights
                 minError = error
-            print 'iteration ', iteration
-            print 'targets: ', self.targets
-            print 'outputs: ', outputs
+            print('iteration ', iteration)
+            print('targets: ', self.targets)
+            print('outputs: ', outputs)
             iteration += 1
         if iteration == self.maxIterations:
-            print 'Exit cause: maximum iterations reached'
+            print('Exit cause: maximum iterations reached')
         elif np.sum(np.subtract(outputs, self.targets)) == 0:
-            print 'Exit cause: outputs reached targets'
+            print('Exit cause: outputs reached targets')
         else:
-            print 'Exit cause: unknown (this should not happen)'
+            print('Exit cause: unknown (this should not happen)')
         return lowestErrorCase, weights, outputs

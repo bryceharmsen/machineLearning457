@@ -9,13 +9,13 @@ from perceptron import Perceptron
 
 def getParams(fileName):
     with open(fileName) as file:
-        return yaml.load(file, Loader=yaml.FullLoader)
+        return yaml.full_load(file)
 
 # 1. create and preprocess inputs
 def preprocessInputsandTargetsFrom(fileName):
     inputs = []
     targets = []
-    with open(fileName, 'rb') as csvFile:
+    with open(fileName, 'r') as csvFile:
         reader = csv.reader(csvFile, delimiter=',')
         currInputsRow = []
         for row in reader:
@@ -40,14 +40,14 @@ inputs, targets = preprocessInputsandTargetsFrom(params['inputFile'])
 percepter = Perceptron(inputs, targets, params['learningRate'], params['maxIterations'])
 lowestErrorCase, finalWeights, finalOutputs = percepter.train()
 # 3. display user results
-print 'lowest error case: '
+print('lowest error case: ')
 #print '\tweights: ', lowestErrorCase['weights']
-print '\toutputs: ', lowestErrorCase['outputs']
-print 'last case: '
+print('\toutputs: ', lowestErrorCase['outputs'])
+print('last case: ')
 #print '\tweights: ', finalWeights
-print '\toutputs: ', finalOutputs
-print '\toutputs in context: ', percepter.contextualize(finalOutputs)
-print 'targets: ', targets
+print('\toutputs: ', finalOutputs)
+print('\toutputs in context: ', percepter.contextualize(finalOutputs))
+print('targets: ', targets)
 rawDifference = np.subtract(finalOutputs, percepter.categorize(targets))
-difference = map(abs, map(int, map(np.sign, list(rawDifference))))
-print 'difference: ', difference
+difference = list(map(abs, map(int, map(np.sign, list(rawDifference)))))
+print('difference: ', difference)
