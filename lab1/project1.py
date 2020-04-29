@@ -5,7 +5,6 @@
 import csv
 import yaml
 import numpy as np
-import matplotlib.pyplot as plt
 from typing import List, Dict, Any
 from perceptron import Perceptron
 
@@ -42,10 +41,7 @@ inputs, targets = preprocessInputsandTargetsFrom(params['inputFile'])
 percepter = Perceptron(params)
 #lowestErrorCase, finalWeights, finalOutputs = percepter.train(inputs, targets)
 finalWeights, finalOutputs, errorEpochs = percepter.train(inputs, targets)
-plt.plot(errorEpochs)
-plt.ylabel('error')
-plt.xlabel('epoch')
-plt.show()
+percepter.displayEpochs(errorEpochs)
 # 3. display user results
 #print('lowest error case: ')
 #print('\tweights: ', lowestErrorCase['weights'])

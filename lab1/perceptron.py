@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import copy
 
 class Perceptron(object):
@@ -112,6 +113,7 @@ class Perceptron(object):
             flattenedChunk = sum(trainingChunks, [])
             #lowestErrorCase, weights, outputs = self.train([x[0] for x in flattenedChunk], [x[1] for x in flattenedChunk])
             weights, outputs, errorEpochs = self.train([x[0] for x in flattenedChunk], [x[1] for x in flattenedChunk])
+            self.displayEpochs(errorEpochs)
             #test
             self.test(testChunk)
             #validate
@@ -124,3 +126,9 @@ class Perceptron(object):
     def assess(self, input):
         """Assesses the provided input using the trained weights"""
         pass
+    
+    def displayEpochs(self, errorEpochs):
+        plt.plot(errorEpochs)
+        plt.ylabel('error')
+        plt.xlabel('epoch')
+        plt.show()
