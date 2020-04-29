@@ -7,7 +7,6 @@ class Perceptron(object):
         self.learningRate = params['learningRate']
         self.maxIterations = params['maxIterations']
         self.trainingPercentage = params['trainingPercentage']
-        self.folds = params['folds']
         self.categorizedTarget = dict()
         self.trainedWeights = list()
 
@@ -20,7 +19,6 @@ class Perceptron(object):
     def initialize(self, inputDim):
         weights = np.random.rand(inputDim)
         weights = [w * 0.4 + 0.1 for w in weights]
-        print(weights)
         return weights
 
     def learn(self, inputs, weights, outputs, targets):
@@ -53,8 +51,12 @@ class Perceptron(object):
                 contextualizedOutput[value] = [key]
         return [contextualizedOutput.get(output)[0] for output in outputs]
     
+    def getError(self, outputs, targets):
+        return np.sum([abs(diff) for diff in np.subtract(outputs, targets)])
+
     def train(self, inputs, targets):
         """Trains the weights using inputs and targets provided in the constructor"""
+        print('TRAINING:')
         targets = self.categorize(targets)
         weights = self.initialize(len(inputs[0]))
         outputs = self.recall(inputs, weights)
@@ -62,12 +64,12 @@ class Perceptron(object):
         #lowestErrorCase = {'outputs': outputs, 'weights': weights}
         #minError = np.sum(np.subtract(outputs, targets))
         #error = minError
-        error = np.sum(np.subtract(outputs, targets))
+        error = self.getError(outputs, targets)
         errorEpochs = [error]
         while (iteration < self.maxIterations and error > 0):
             outputs = self.recall(inputs, weights)
             weights = self.learn(inputs, weights, outputs, targets)
-            error = abs(np.sum(np.subtract(outputs, targets)))
+            error = self.getError(outputs, targets)
             errorEpochs.append(error)
             #if error < minError:
             #    lowestErrorCase['outputs'] = outputs
@@ -79,7 +81,7 @@ class Perceptron(object):
             iteration += 1
         if iteration == self.maxIterations:
             print('Exit cause: maximum iterations reached')
-        elif np.sum(np.subtract(outputs, targets)) == 0:
+        elif self.getError(outputs, targets) == 0:
             print('Exit cause: outputs matched targets')
         else:
             print('Exit cause: unknown (this should not happen)')
@@ -88,50 +90,62 @@ class Perceptron(object):
     
     def test(self, inputs, weights, targets):
         """Tests the trained weight matrix for accuracy"""
-        print('TESTING:')
-        print(inputs, targets)
+        print(f'TESTING:\n\tinputs: {inputs}\n\ttargets: {targets}')
         outputs = self.recall(inputs, weights)
         contextualizedOutputs = self.contextualize(outputs)
-        print(contextualizedOutputs)
-
-    def validate(self):
-        pass
+        diffs = np.subtract(outputs, self.categorize(targets))
+        numCorrect = 0
+        for diff in diffs:
+            if diff == 0:
+                numCorrect += 1
+        accuracy = numCorrect / len(targets)
+        print(f'\toutputs: {contextualizedOutputs}\n\taccuracy: {accuracy * 100}%')
     
-    def splitIntoChunks(self, inputs, targets):
-        chunks = [[] for i in range(self.folds)]
-        for i in range(len(targets)):
-            chunks[i % len(chunks)].append((inputs[i], targets[i]))
-        return chunks
+    #def splitIntoChunks(self, inputs, targets):
+    #    chunks = [[] for i in range(self.folds)]
+    #    for i in range(len(targets)):
+    #       chunks[i % len(chunks)].append((inputs[i], targets[i]))
+    #    return chunks
+    
+    def split(self, inputs, targets):
+        trainingInputs = inputs[::2]
+        testInputs = inputs[1::2]
+        trainingTargets = targets[::2]
+        testTargets = targets[1::2]
+        return trainingInputs, trainingTargets, testInputs, testTargets
 
-    def crossValidate(self, inputs, targets):
-        """Validation"""
-        self.appendExtraNodeTo(inputs)
-        chunks = self.splitIntoChunks(inputs, targets)   
-        for i in range(self.folds):
-            testChunk = chunks.pop()
-            validationChunk = chunks.pop()
-            trainingChunks = chunks
-            #train
-            flattenedChunk = sum(trainingChunks, [])
-            #lowestErrorCase, weights, outputs = self.train([x[0] for x in flattenedChunk], [x[1] for x in flattenedChunk])
-            trainingInputs = [x[0] for x in flattenedChunk]
-            trainingTargets = [x[1] for x in flattenedChunk]
-            weights, outputs, errorEpochs = self.train(trainingInputs, trainingTargets)
-            self.displayEpochs(errorEpochs)
-            #test
-            testInputs = [x[0] for x in testChunk]
-            testTargets = [x[1] for x in testChunk]
-            self.test(testInputs, weights, testTargets)
-            #validate
-            self.validate()
-            #rotate and re-assemble chunks
-            trainingChunks.append(validationChunk)
-            chunks = [testChunk]
-            chunks.extend(trainingChunks)
 
-    def assess(self, input):
-        """Assesses the provided input using the trained weights"""
-        pass
+    def trainAndTest(self, inputs, targets):
+        trainingInputs, trainingTargets, testInputs, testTargets = self.split(inputs, targets)
+        weights, outputs, errorEpochs = self.train(trainingInputs, trainingTargets)
+        print(f'Training targets: {trainingTargets}\nTraining outputs: {self.contextualize(outputs)}')
+        self.displayEpochs(errorEpochs)
+        self.test(testInputs, weights, testTargets)
+
+    #def crossValidate(self, inputs, targets):
+    #    """Validation"""
+    #    self.appendExtraNodeTo(inputs)
+    #   chunks = self.splitIntoChunks(inputs, targets)   
+    #    for i in range(self.folds):
+    #        #group test and train chunks
+    #        testChunk = chunks.pop()
+    #        validationChunk = chunks.pop()
+    #       trainingChunks = chunks
+    #       #train
+    #       flattenedTrainingChunk = sum(trainingChunks, [])
+    #       #lowestErrorCase, weights, outputs = self.train([x[0] for x in flattenedChunk], [x[1] for x in flattenedChunk])
+    #        trainingInputs = [x[0] for x in flattenedTrainingChunk]
+    #       trainingTargets = [x[1] for x in flattenedTrainingChunk]
+    #       weights, outputs, errorEpochs = self.train(trainingInputs, trainingTargets)
+    #       self.displayEpochs(errorEpochs)
+    #        #test
+    #        testInputs = [x[0] for x in testChunk]
+    #        testTargets = [x[1] for x in testChunk]
+    #        self.test(testInputs, weights, testTargets)
+    #        #rotate and re-assemble chunks
+    #        trainingChunks.append(validationChunk)
+    #        chunks = [testChunk]
+    #        chunks.extend(trainingChunks)
     
     def displayEpochs(self, errorEpochs):
         plt.plot(errorEpochs)
