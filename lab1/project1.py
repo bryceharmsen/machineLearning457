@@ -5,6 +5,7 @@
 import csv
 import yaml
 import numpy as np
+from typing import List, Dict, Any
 from perceptron import Perceptron
 
 def getParams(fileName):
@@ -37,7 +38,12 @@ params = getParams('params.yaml')
 inputs, targets = preprocessInputsandTargetsFrom(params['inputFile'])
 
 # 2. pass inputs to the Perceptron
-percepter = Perceptron(inputs, targets, params['learningRate'], params['maxIterations'])
+percepter = Perceptron(inputs, 
+                       targets, 
+                       params['learningRate'], 
+                       params['maxIterations'], 
+                       params['trainingPercentage'], 
+                       params['folds'])
 lowestErrorCase, finalWeights, finalOutputs = percepter.trainOnly()
 # 3. display user results
 print('lowest error case: ')

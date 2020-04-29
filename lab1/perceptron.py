@@ -2,11 +2,13 @@ import numpy as np
 import copy
 
 class Perceptron(object):
-    def __init__(self, inputs, targets, learningRate, maxIterations):
+    def __init__(self, inputs, targets, learningRate, maxIterations, trainingPercentage, folds):
         self.inputs = [row + [-1] for row in inputs]
         self.targets = targets
         self.learningRate = learningRate
         self.maxIterations = maxIterations
+        self.trainingPercentage = trainingPercentage
+        self.folds = folds
         self.categorizedTarget = {}
 
     def column(self, array, colIdx):
@@ -87,7 +89,7 @@ class Perceptron(object):
     
     def crossValidate(self):
         """Validation"""
-        pass
+        chunkSize = len(self.targets) / self.folds
     
     def assess(self, input):
         """Assesses the provided input using the trained weights"""
