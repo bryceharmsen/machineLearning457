@@ -4,6 +4,7 @@
 # 3. display to the user the results
 import csv
 import yaml
+import numpy as np
 from perceptron import Perceptron
 
 def getParams(fileName):
@@ -11,19 +12,20 @@ def getParams(fileName):
         return yaml.load(file, Loader=yaml.FullLoader)
 
 # 1. create and preprocess inputs
-def preprocess(fileName):
-    lists = []
+def preprocessInputsandTargetsFrom(fileName):
+    inputs = []
+    targets = []
     with open(fileName, 'rb') as csvFile:
         reader = csv.reader(csvFile, delimiter=',')
-        currList = []
+        currInputsRow = []
         for row in reader:
             if len(row) == 1:
-                target = row[0]
-                lists.append((target, currList))
-                currList = []
+                targets.append(row[0])
+                inputs.append(currInputsRow)
+                currInputsRow = []
             else:
-                currList.extend(list(map(int, row)))
-    return lists
+                currInputsRow.extend(list(map(int, row)))
+    return inputs, targets
 
 def buildConfusionMatrix(outputs, targets):
     truePos = 0
@@ -32,18 +34,20 @@ def buildConfusionMatrix(outputs, targets):
     falseNeg = 0
 
 params = getParams('params.yaml')
-supervisedLists = preprocess(params['inputFile'])
-inputs = [value[1] for value in supervisedLists]
-targets = [value[0] for value in supervisedLists]
+inputs, targets = preprocessInputsandTargetsFrom(params['inputFile'])
 
 # 2. pass inputs to the Perceptron
 percepter = Perceptron(inputs, targets, params['learningRate'], params['maxIterations'])
-lowestErrorCase, weights, outputs = percepter.train()
+lowestErrorCase, finalWeights, finalOutputs = percepter.train()
 # 3. display user results
 print 'lowest error case: '
 #print '\tweights: ', lowestErrorCase['weights']
 print '\toutputs: ', lowestErrorCase['outputs']
 print 'last case: '
-#print '\tweights: ', weights
-print '\toutputs: ', outputs
-print 'Provide output about perceptron learning results'
+#print '\tweights: ', finalWeights
+print '\toutputs: ', finalOutputs
+print '\toutputs in context: ', percepter.contextualize(finalOutputs)
+print 'targets: ', targets
+rawDifference = np.subtract(finalOutputs, percepter.categorize(targets))
+difference = map(abs, map(int, map(np.sign, list(rawDifference))))
+print 'difference: ', difference

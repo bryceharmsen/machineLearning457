@@ -7,6 +7,7 @@ class Perceptron(object):
         self.targets = targets
         self.learningRate = learningRate
         self.maxIterations = maxIterations
+        self.categorizedTarget = {}
 
     def column(self, array, colIdx):
         return [row[colIdx] for row in array]
@@ -17,34 +18,42 @@ class Perceptron(object):
         return weights
 
     def learn(self, weights, outputs, targets):
-        for i in range(0, len(weights)):
+        for i in range(len(weights)):
             if i > 0:
                 weights[i] = copy.deepcopy(weights[i - 1])
-            for j in range(0, len(weights[0])):
+            for j in range(len(weights[0])):
                 weights[i][j] -= self.learningRate * (outputs[i] - targets[i]) * self.inputs[i][j]
         return weights
 
     def recall(self, weights):
         inputs_T = np.transpose(self.inputs)
-        outputs = [np.dot(weights[i], self.column(inputs_T,i)) for i in range(0, len(weights))]
+        outputs = [np.dot(weights[i], self.column(inputs_T,i)) for i in range(len(weights))]
         outputs = map(int, map(np.sign, outputs))
         return outputs
     
     def categorize(self, targets):
+        newTargets = []
         categories = [-1, 1]
-        categorizedTarget = {}
-        for i in range(0, len(targets)):
-            if not categorizedTarget.has_key(targets[i]):
-                categorizedTarget[targets[i]] = categories.pop()
-            targets[i] = categorizedTarget.get(targets[i])
-        return targets
+        for i in range(len(targets)):
+            if not self.categorizedTarget.has_key(targets[i]):
+                self.categorizedTarget[targets[i]] = categories.pop()
+            newTargets.append(self.categorizedTarget.get(targets[i]))
+        return newTargets
+    
+    def contextualize(self, outputs):
+        contextualizedOutput = {}
+        for key, value in self.categorizedTarget.items():
+            if value in contextualizedOutput:
+                contextualizedOutput[value].append(key)
+            else:
+                contextualizedOutput[value] = [key]
+        return [contextualizedOutput.get(output)[0] for output in outputs]
     
     def train(self):
-        #runs algorithm
-        outputs = self.recall(self.initialize(len(self.inputs), len(self.inputs[0])))
-        self.categorize(self.targets)
-        iteration = 0
+        self.targets = self.categorize(self.targets)
         weights = self.initialize(len(self.inputs), len(self.inputs[0]))
+        outputs = self.recall(weights)
+        iteration = 0
         lowestErrorCase = {'outputs': outputs, 'weights': weights}
         minError = np.sum(np.subtract(outputs, self.targets))
         error = minError
@@ -55,6 +64,7 @@ class Perceptron(object):
             if error < minError:
                 lowestErrorCase['outputs'] = outputs
                 lowestErrorCase['weights'] = weights
+                minError = error
             print 'iteration ', iteration
             print 'targets: ', self.targets
             print 'outputs: ', outputs
