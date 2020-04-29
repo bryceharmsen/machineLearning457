@@ -5,7 +5,6 @@
 # 4. train and test the Perceptron
 import csv
 import yaml
-import numpy as np
 from typing import List, Dict, Any
 from perceptron import Perceptron
 
