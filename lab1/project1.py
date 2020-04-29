@@ -48,6 +48,5 @@ print 'last case: '
 print '\toutputs: ', finalOutputs
 print '\toutputs in context: ', percepter.contextualize(finalOutputs)
 print 'targets: ', targets
-rawDifference = np.subtract(finalOutputs, percepter.categorize(targets))
-difference = map(abs, map(int, map(np.sign, list(rawDifference))))
+difference = map(abs, map(int, map(np.sign, list(np.subtract(finalOutputs, percepter.categorize(targets))))))
 print 'difference: ', difference
