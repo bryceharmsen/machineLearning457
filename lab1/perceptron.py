@@ -2,31 +2,32 @@ import numpy as np
 import copy
 
 class Perceptron(object):
-    def __init__(self, inputs, targets, learningRate, maxIterations, trainingPercentage, folds):
-        self.inputs = [row + [-1] for row in inputs]
-        self.targets = targets
-        self.learningRate = learningRate
-        self.maxIterations = maxIterations
-        self.trainingPercentage = trainingPercentage
-        self.folds = folds
+    def __init__(self, params):
+        self.learningRate = params['learningRate']
+        self.maxIterations = params['maxIterations']
+        self.trainingPercentage = params['trainingPercentage']
+        self.folds = params['folds']
         self.categorizedTarget = dict()
 
     def column(self, array, colIdx):
         return [row[colIdx] for row in array]
+    
+    def appendExtraNodeTo(self, inputs):
+        return [row + [-1] for row in inputs]
 
     def initialize(self, inputDim):
         weights = np.random.rand(inputDim)
         weights = [w /2 for w in weights]
         return weights
 
-    def learn(self, weights, outputs, targets):
-        for i in range(len(self.inputs)):
-            for j in range(len(self.inputs[0])):
-                weights[j] -= self.learningRate * (outputs[i] - targets[i]) * self.inputs[i][j]
+    def learn(self, inputs, weights, outputs, targets):
+        for i in range(len(inputs)):
+            for j in range(len(inputs[0])):
+                weights[j] -= self.learningRate * (outputs[i] - targets[i]) * inputs[i][j]
         return weights
 
-    def recall(self, weights):
-        inputs_T = np.transpose(self.inputs)
+    def recall(self, inputs, weights):
+        inputs_T = np.transpose(inputs)
         outputs = [np.dot(weights, self.column(inputs_T,i)) for i in range(len(inputs_T[0]))]
         outputs = list(map(int, map(np.sign, outputs)))
         return outputs
@@ -53,14 +54,14 @@ class Perceptron(object):
         """Trains the weights using inputs and targets provided in the constructor"""
         targets = self.categorize(targets)
         weights = self.initialize(len(inputs[0]))
-        outputs = self.recall(weights)
+        outputs = self.recall(inputs, weights)
         iteration = 0
         lowestErrorCase = {'outputs': outputs, 'weights': weights}
         minError = np.sum(np.subtract(outputs, targets))
         error = minError
         while (iteration < self.maxIterations and error > 0):
-            outputs = self.recall(weights)
-            weights = self.learn(weights, outputs, targets)
+            outputs = self.recall(inputs, weights)
+            weights = self.learn(inputs, weights, outputs, targets)
             error = abs(np.sum(np.subtract(outputs, targets)))
             if error < minError:
                 lowestErrorCase['outputs'] = outputs
@@ -78,17 +79,39 @@ class Perceptron(object):
             print('Exit cause: unknown (this should not happen)')
         return lowestErrorCase, weights, outputs
     
-    def trainOnly(self):
-        return self.train(self.inputs, self.targets)
-    
     def test(self):
         """Tests the trained weight matrix for accuracy"""
         pass
+
+    def validate(self):
+        pass
     
-    def crossValidate(self):
+    def splitIntoChunks(self, inputs, targets):
+        chunks = [[] for i in range(self.folds)]
+        for i in range(len(targets)):
+            chunks[i % len(chunks)].append((inputs[i], targets[i]))
+        return chunks
+
+    def crossValidate(self, inputs, targets):
         """Validation"""
-        chunkSize = len(self.targets) / self.folds
-    
+        self.appendExtraNodeTo(inputs)
+        chunks = self.splitIntoChunks(inputs, targets)        
+        for i in range(self.folds):
+            testChunk = chunks.pop()
+            validationChunk = chunks.pop()
+            trainingChunks = chunks
+            #train
+            flattenedChunk = sum(trainingChunks, [])
+            lowestErrorCase, weights, outputs = self.train([x[0] for x in flattenedChunk], [x[1] for x in flattenedChunk])
+            #test
+            self.test()
+            #validate
+            self.validate()
+            #rotate and re-assemble chunks
+            trainingChunks.append(validationChunk)
+            chunks = [testChunk]
+            chunks.extend(trainingChunks)
+
     def assess(self, input):
         """Assesses the provided input using the trained weights"""
         pass
