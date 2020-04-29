@@ -86,11 +86,13 @@ class Perceptron(object):
         #return lowestErrorCase, weights, outputs
         return weights, outputs, errorEpochs
     
-    def test(self, inputs):
+    def test(self, inputs, weights, targets):
         """Tests the trained weight matrix for accuracy"""
-        for input in inputs:
-            pass
-        pass
+        print('TESTING:')
+        print(inputs, targets)
+        outputs = self.recall(inputs, weights)
+        contextualizedOutputs = self.contextualize(outputs)
+        print(contextualizedOutputs)
 
     def validate(self):
         pass
@@ -112,10 +114,14 @@ class Perceptron(object):
             #train
             flattenedChunk = sum(trainingChunks, [])
             #lowestErrorCase, weights, outputs = self.train([x[0] for x in flattenedChunk], [x[1] for x in flattenedChunk])
-            weights, outputs, errorEpochs = self.train([x[0] for x in flattenedChunk], [x[1] for x in flattenedChunk])
+            trainingInputs = [x[0] for x in flattenedChunk]
+            trainingTargets = [x[1] for x in flattenedChunk]
+            weights, outputs, errorEpochs = self.train(trainingInputs, trainingTargets)
             self.displayEpochs(errorEpochs)
             #test
-            self.test(testChunk)
+            testInputs = [x[0] for x in testChunk]
+            testTargets = [x[1] for x in testChunk]
+            self.test(testInputs, weights, testTargets)
             #validate
             self.validate()
             #rotate and re-assemble chunks
