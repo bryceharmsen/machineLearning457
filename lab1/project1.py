@@ -38,22 +38,22 @@ params = getParams('params.yaml')
 inputs, targets = preprocessInputsandTargetsFrom(params['inputFile'])
 
 # 2. pass inputs to the Perceptron
-percepter = Perceptron(inputs, 
-                       targets, 
-                       params['learningRate'], 
-                       params['maxIterations'], 
-                       params['trainingPercentage'], 
-                       params['folds'])
-lowestErrorCase, finalWeights, finalOutputs = percepter.trainOnly()
+percepter = Perceptron(params)
+#lowestErrorCase, finalWeights, finalOutputs = percepter.train(inputs, targets)
+finalWeights, finalOutputs, errorEpochs = percepter.train(inputs, targets)
+percepter.displayEpochs(errorEpochs)
 # 3. display user results
-print('lowest error case: ')
-#print '\tweights: ', lowestErrorCase['weights']
-print('\toutputs: ', lowestErrorCase['outputs'])
+#print('lowest error case: ')
+#print('\tweights: ', lowestErrorCase['weights'])
+#print('\toutputs: ', lowestErrorCase['outputs'])
 print('last case: ')
-#print '\tweights: ', finalWeights
+print('\tweights: ', finalWeights)
 print('\toutputs: ', finalOutputs)
 print('\toutputs in context: ', percepter.contextualize(finalOutputs))
 print('targets: ', targets)
 rawDifference = np.subtract(finalOutputs, percepter.categorize(targets))
 difference = list(map(abs, map(int, map(np.sign, list(rawDifference)))))
 print('difference: ', difference)
+
+print('Now, for cross-validation!')
+percepter.crossValidate(inputs, targets)
