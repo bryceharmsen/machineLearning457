@@ -49,30 +49,46 @@ class Perceptron(object):
                 contextualizedOutput[value] = [key]
         return [contextualizedOutput.get(output)[0] for output in outputs]
     
-    def train(self):
-        self.targets = self.categorize(self.targets)
-        weights = self.initialize(len(self.inputs), len(self.inputs[0]))
+    def train(self, inputs, targets):
+        """Trains the weights using inputs and targets provided in the constructor"""
+        targets = self.categorize(targets)
+        weights = self.initialize(len(inputs), len(inputs[0]))
         outputs = self.recall(weights)
         iteration = 0
         lowestErrorCase = {'outputs': outputs, 'weights': weights}
-        minError = np.sum(np.subtract(outputs, self.targets))
+        minError = np.sum(np.subtract(outputs, targets))
         error = minError
         while (iteration < self.maxIterations and error > 0):
             outputs = self.recall(weights)
-            weights = self.learn(weights, outputs, self.targets)
-            error = abs(np.sum(np.subtract(outputs, self.targets)))
+            weights = self.learn(weights, outputs, targets)
+            error = abs(np.sum(np.subtract(outputs, targets)))
             if error < minError:
                 lowestErrorCase['outputs'] = outputs
                 lowestErrorCase['weights'] = weights
                 minError = error
             print('iteration ', iteration)
-            print('targets: ', self.targets)
+            print('targets: ', targets)
             print('outputs: ', outputs)
             iteration += 1
         if iteration == self.maxIterations:
             print('Exit cause: maximum iterations reached')
-        elif np.sum(np.subtract(outputs, self.targets)) == 0:
+        elif np.sum(np.subtract(outputs, targets)) == 0:
             print('Exit cause: outputs reached targets')
         else:
             print('Exit cause: unknown (this should not happen)')
         return lowestErrorCase, weights, outputs
+    
+    def trainOnly(self):
+        return self.train(self.inputs, self.targets)
+    
+    def test(self):
+        """Tests the trained weight matrix for accuracy"""
+        pass
+    
+    def crossValidate(self):
+        """Validation"""
+        pass
+    
+    def assess(self, input):
+        """Assesses the provided input using the trained weights"""
+        pass

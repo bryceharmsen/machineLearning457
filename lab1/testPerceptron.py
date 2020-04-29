@@ -36,12 +36,11 @@ class PerceptronTests(unittest.TestCase):
             self.assertListEqual(list(weights[i]),list(newWeights[i]))
 
     def test_recall(self):
-        pass
         #NEED TO WORK ON THIS TEST MORE
         weights = np.ones((self.rows, self.cols + 1), dtype=int)
         outputs = self.percepter.recall(weights)
         expectedOutputs = [np.sum(inputRow) for inputRow in self.percepter.inputs]
-        print weights, outputs, expectedOutputs
+        print(weights, outputs, expectedOutputs)
         self.assertListEqual(outputs, expectedOutputs)
 
     def test_categorize(self):

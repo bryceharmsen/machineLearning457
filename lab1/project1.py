@@ -38,7 +38,7 @@ inputs, targets = preprocessInputsandTargetsFrom(params['inputFile'])
 
 # 2. pass inputs to the Perceptron
 percepter = Perceptron(inputs, targets, params['learningRate'], params['maxIterations'])
-lowestErrorCase, finalWeights, finalOutputs = percepter.train()
+lowestErrorCase, finalWeights, finalOutputs = percepter.trainOnly()
 # 3. display user results
 print('lowest error case: ')
 #print '\tweights: ', lowestErrorCase['weights']
