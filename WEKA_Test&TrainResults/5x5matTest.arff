@@ -1,0 +1,59 @@
+%
+%Test dataset of 5 x 5 matrice 
+%This data was not used for training and is completely new
+%
+%
+
+@RELATION lettertest
+
+@ATTRIBUTE x0y0 integer
+@ATTRIBUTE x0y1 integer
+@ATTRIBUTE x0y2 integer
+@ATTRIBUTE x0y3 integer
+@ATTRIBUTE x0y4 integer
+@ATTRIBUTE x1y0 integer
+@ATTRIBUTE x1y1 integer
+@ATTRIBUTE x1y2 integer
+@ATTRIBUTE x1y3 integer
+@ATTRIBUTE x1y4 integer
+@ATTRIBUTE x2y0 integer
+@ATTRIBUTE x2y1 integer
+@ATTRIBUTE x2y2 integer
+@ATTRIBUTE x2y3 integer
+@ATTRIBUTE x2y4 integer
+@ATTRIBUTE x3y0 integer
+@ATTRIBUTE x3y1 integer
+@ATTRIBUTE x3y2 integer
+@ATTRIBUTE x3y3 integer
+@ATTRIBUTE x3y4 integer
+@ATTRIBUTE x4y0 integer
+@ATTRIBUTE x4y1 integer
+@ATTRIBUTE x4y2 integer
+@ATTRIBUTE x4y3 integer
+@ATTRIBUTE x4y4 integer
+@ATTRIBUTE class {I,L}
+
+@DATA 
+1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,I
+0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,I
+0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,I
+0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,I
+0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,I
+0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,L
+0,0,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,L
+0,0,1,0,0,0,0,1,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,L
+0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,L
+0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,L
+
+
+
+%These are sets that are neither I or L
+
+%0,0,1,1,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,Null
+%0,1,1,1,1,0,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,Null
+%0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Null
+%0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Null
+%1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,Null
+
+
+
