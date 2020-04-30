@@ -5,13 +5,8 @@
 # 4. train and test the Perceptron
 import sys
 import csv
-import yaml
-from typing import List, Dict, Any
-from perceptron import Perceptron
-
-def getParams(fileName):
-    with open(fileName) as file:
-        return yaml.full_load(file)
+from util import getParams
+from slp import SingleLayerPerceptron
 
 def preprocessInputsandTargetsFrom(fileName):
     inputs = []
@@ -40,7 +35,7 @@ if __name__ == "__main__":
     inputs, targets = preprocessInputsandTargetsFrom(params['inputFile'])
     print(f'Number of data samples: {len(targets):d}')
     # 3. pass inputs to the Perceptron for learning
-    percepter = Perceptron(params)
+    percepter = SingleLayerPerceptron(params)
     # 4. train and test the Perceptron
     print(f'Training and testing based on {params["inputFile"]} data')
     percepter.trainAndTest(inputs, targets)

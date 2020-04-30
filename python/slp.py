@@ -3,20 +3,15 @@ import matplotlib.pyplot as plt
 import random
 from datetime import datetime
 import copy
+from neuralnet import NeuralNetwork
 
-class Perceptron(object):
+class SingleLayerPerceptron(NeuralNetwork):
     def __init__(self, params):
-        self.learningRate = params['learningRate']
         self.maxIterations = params['maxIterations']
         self.trainingPercentage = params['trainingPercentage']
         self.categorizedTarget = dict()
         self.trainedWeights = list()
-
-    def column(self, array, colIdx):
-        return [row[colIdx] for row in array]
-    
-    def appendExtraNodeTo(self, inputs):
-        return [row + [-1] for row in inputs]
+        super().__init__(params)
 
     def initialize(self, inputDim):
         random.seed(datetime.now())
@@ -51,9 +46,6 @@ class Perceptron(object):
             else:
                 contextualizedOutput[value] = [key]
         return [contextualizedOutput.get(output)[0] for output in outputs]
-    
-    def getError(self, outputs, targets):
-        return (1 - self.calcuateAccuracy(outputs, targets)) * 100
 
     def train(self, inputs, targets):
         """Trains the weights using inputs and targets provided in the constructor"""
@@ -62,12 +54,12 @@ class Perceptron(object):
         weights = self.initialize(len(inputs[0]))
         outputs = self.recall(inputs, weights)
         iteration = 0
-        error = self.getError(outputs, categorizedTargets)
+        error = self.calculateError(outputs, categorizedTargets)*100
         errorEpochs = [error]
         while (iteration < self.maxIterations and error > 0):
             outputs = self.recall(inputs, weights)
             weights = self.learn(inputs, weights, outputs, categorizedTargets)
-            error = self.getError(outputs, categorizedTargets)
+            error = self.calculateError(outputs, categorizedTargets)*100
             errorEpochs.append(error)
             print(f'iteration {iteration}\ntargets: {categorizedTargets}\noutputs: {outputs}')
             print(f'accuracy: {int(self.calcuateAccuracy(outputs, targets) * 100)}%\n')
@@ -75,7 +67,7 @@ class Perceptron(object):
         print('Exit cause:')
         if iteration == self.maxIterations:
             print('\tmaximum iterations reached')
-        elif self.getError(outputs, categorizedTargets) == 0:
+        elif self.calculateError(outputs, categorizedTargets) == 0:
             print('\toutputs matched targets')
         else:
             print('\tunknown (this should not happen)')
@@ -118,10 +110,4 @@ class Perceptron(object):
         self.test(testInputs, weights, testTargets)
     
     def displayEpochs(self, errorEpochs):
-        """Plot error across training epochs"""
-        plt.plot(errorEpochs)
-        plt.ylabel('error (%)')
-        plt.xlabel('epoch')
-        plt.xticks(range(len(errorEpochs)))
-        plt.title('Training Error by Epoch')
-        plt.show()
+        super().displayEpochs(errorEpochs, './project1/results')
