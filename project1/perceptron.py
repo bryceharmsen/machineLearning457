@@ -124,4 +124,7 @@ class Perceptron(object):
         plt.xlabel('epoch')
         plt.xticks(range(len(errorEpochs)))
         plt.title('Training Error by Epoch')
-        plt.show()
+        plt.savefig('./pyResults/errorEpochs.png')
+        plt.show(block=False)
+        plt.pause(1)
+        plt.close()

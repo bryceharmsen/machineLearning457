@@ -5,4 +5,4 @@ maxIterations: 100
 #training percentage is typically between 0.5 and 0.6
 trainingPercentage: 0.6
 
-inputFile: 'supervised5by5.csv'
+inputFile: './pyData/supervised5by5.csv'
