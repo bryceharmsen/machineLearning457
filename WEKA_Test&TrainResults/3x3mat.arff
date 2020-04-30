@@ -1,0 +1,31 @@
+%
+%Supervised learning with 3 x 3 matrices
+%
+%
+%
+
+@RELATION letter
+
+@ATTRIBUTE x0y0 integer
+@ATTRIBUTE x0y1 integer
+@ATTRIBUTE x0y2 integer
+@ATTRIBUTE x1y0 integer
+@ATTRIBUTE x1y1 integer
+@ATTRIBUTE x1y2 integer
+@ATTRIBUTE x2y0 integer
+@ATTRIBUTE x2y1 integer
+@ATTRIBUTE x2y2 integer
+@ATTRIBUTE class {I,L}
+
+@DATA 
+0,1,0,0,1,0,0,1,0,I
+1,0,0,1,0,0,1,0,0,I
+0,0,0,1,0,0,1,1,0,L
+0,0,1,0,0,1,0,0,1,I
+1,0,0,1,0,0,1,1,0,L
+0,0,0,0,1,0,0,1,0,I
+0,0,0,1,0,0,1,0,0,I
+0,0,0,0,0,1,0,0,1,I
+1,0,0,1,0,0,1,1,1,L
+0,1,0,0,1,0,0,1,1,L
+0,0,0,0,1,0,0,1,1,L
