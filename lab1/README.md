@@ -2,7 +2,7 @@
 This is the Perceptron project 1 for Dr. Andonie.
 
 # Running the perceptron
-Before running, check that the parameters set in params.yaml are set to your preference. Then, to run, call ```python project1.py```
+Before running, check that the parameters set in params.yaml are set to your preference. Then, to run, call ```python3 project1.py```
 
 # Testing the perceptron
 To run the unit tests built for the perceptron, run ```python -m unittest discover```
@@ -17,3 +17,8 @@ An example for 3x3 I data looks like:
 0,1,0  
 i  
 We also need 5x5 data for L and I. Contributions are welcome.
+
+# Installing package dependencies
+In general, any missing packages on the host machine can be installed with ```pip3 install PACKAGE_NAME```  
+For this project, the current install list should suffice:  
+```pip3 install pyyaml matplotlib numpy```

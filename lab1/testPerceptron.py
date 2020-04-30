@@ -8,11 +8,14 @@ class PerceptronTests(unittest.TestCase):
         unittest.TestCase.setUp(self)
         inputs = [  [0,1,0,0,1,0,0,1,0], \
                     [1,0,0,1,0,0,1,1,1], \
-                    [1,0,0,1,0,0,1,0,0]]
-        targets = [['i'],['l'],['i']]
+                    [1,0,0,1,0,0,1,0,0], \
+                    [0,0,1,0,0,1,0,0,1]]
+        targets = [['i'],['l'],['i'], ['i']]
         learningRate = 0.1
         maxIterations = 1
-        self.percepter = Perceptron(inputs,targets,learningRate,maxIterations)
+        trainingPercentage = 0.5
+        folds = 2
+        self.percepter = Perceptron(inputs,targets,learningRate,maxIterations, trainingPercentage, folds)
         self.rows = len(inputs)
         self.cols = len(inputs[0])
 
@@ -23,25 +26,22 @@ class PerceptronTests(unittest.TestCase):
         self.assertEqual(self.percepter.column(matrix,2), [2,5,8,11])
 
     def test_initialize(self):
-        weights = self.percepter.initialize(self.rows, self.cols)
-        self.assertEqual(len(weights), self.rows)
-        self.assertEqual(len(weights[0]), self.cols)
+        weights = self.percepter.initialize(self.cols)
+        self.assertEqual(len(weights), self.cols)
     
     def test_learn(self):
-        targets = [1,-1,1] #target values for outputs
-        outputs = [1,-1,1] #all correct outputs
-        weights = self.percepter.initialize(self.rows, self.cols)
+        targets = [1,-1,1,1] #target values for outputs
+        outputs = [1,-1,1,1] #all correct outputs
+        weights = self.percepter.initialize(self.cols + 1)
         newWeights = self.percepter.learn(weights, outputs, targets)
-        for i in range(0, len(weights)):
-            self.assertListEqual(list(weights[i]),list(newWeights[i]))
+        self.assertListEqual(list(weights),list(newWeights))
 
     def test_recall(self):
-        pass
         #NEED TO WORK ON THIS TEST MORE
-        weights = np.ones((self.rows, self.cols + 1), dtype=int)
+        weights = np.ones(self.cols + 1, dtype=int)
         outputs = self.percepter.recall(weights)
         expectedOutputs = [np.sum(inputRow) for inputRow in self.percepter.inputs]
-        print weights, outputs, expectedOutputs
+        print(weights, outputs, expectedOutputs)
         self.assertListEqual(outputs, expectedOutputs)
 
     def test_categorize(self):
