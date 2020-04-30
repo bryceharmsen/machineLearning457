@@ -37,6 +37,7 @@ def buildConfusionMatrix(outputs, targets):
 params = getParams('params.yaml')
 # 2. create and preprocess the inputs,
 inputs, targets = preprocessInputsandTargetsFrom(params['inputFile'])
+print(f'Number of data samples: {len(targets):d}')
 # 3. pass inputs to the Perceptron for learning
 percepter = Perceptron(params)
 # 4. train and test the Perceptron
