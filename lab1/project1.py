@@ -3,6 +3,7 @@
 # 2. create and preprocess the inputs,
 # 3. pass inputs to prepare the Perceptron
 # 4. train and test the Perceptron
+import sys
 import csv
 import yaml
 from typing import List, Dict, Any
@@ -28,8 +29,13 @@ def preprocessInputsandTargetsFrom(fileName):
     return inputs, targets
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print(f'Proper use of this program looks like: \
+               \n\tpython3 {sys.argv[0]} params*.yaml \
+               \n\nExiting gracefully...')
+        sys.exit()
     # 1. get user-defined parameters
-    params = getParams('params.yaml')
+    params = getParams(sys.argv[1])
     # 2. create and preprocess the inputs,
     inputs, targets = preprocessInputsandTargetsFrom(params['inputFile'])
     print(f'Number of data samples: {len(targets):d}')

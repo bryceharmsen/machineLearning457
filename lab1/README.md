@@ -2,7 +2,7 @@
 This is the Perceptron project 1 for Dr. Andonie.
 
 # Running the perceptron
-Before running, check that the parameters set in params.yaml are set to your preference. Then, to run, call ```python3 project1.py```
+Before running, check that the parameters set in the params*.yaml you plan to use are set to your preference. Then, to run, call ```python3 project1.py PARAMS_FILENAME.yaml```
 
 # Testing the perceptron
 To run the unit tests built for the perceptron, run ```python -m unittest discover```
