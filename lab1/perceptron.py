@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import random
+from datetime import datetime
 import copy
 
 class Perceptron(object):
@@ -17,9 +19,8 @@ class Perceptron(object):
         return [row + [-1] for row in inputs]
 
     def initialize(self, inputDim):
-        weights = np.random.rand(inputDim)
-        weights = [w * 0.4 + 0.1 for w in weights]
-        return weights
+        random.seed(datetime.now())
+        return [random.uniform(0.1,0.5) for i in range(inputDim)]
 
     def learn(self, inputs, weights, outputs, targets):
         for i in range(len(inputs)):
@@ -122,4 +123,5 @@ class Perceptron(object):
         plt.ylabel('error (%)')
         plt.xlabel('epoch')
         plt.xticks(range(len(errorEpochs)))
+        plt.title('Training Error by Epoch')
         plt.show()
