@@ -27,19 +27,14 @@ def preprocessInputsandTargetsFrom(fileName):
                 currInputsRow.extend(list(map(int, row)))
     return inputs, targets
 
-def buildConfusionMatrix(outputs, targets):
-    truePos = 0
-    falsePos = 0
-    trueNeg = 0
-    falseNeg = 0
-
-# 1. get user-defined parameters
-params = getParams('params.yaml')
-# 2. create and preprocess the inputs,
-inputs, targets = preprocessInputsandTargetsFrom(params['inputFile'])
-print(f'Number of data samples: {len(targets):d}')
-# 3. pass inputs to the Perceptron for learning
-percepter = Perceptron(params)
-# 4. train and test the Perceptron
-print(f'Training and testing based on {params["inputFile"]} data')
-percepter.trainAndTest(inputs, targets)
+if __name__ == "__main__":
+    # 1. get user-defined parameters
+    params = getParams('params.yaml')
+    # 2. create and preprocess the inputs,
+    inputs, targets = preprocessInputsandTargetsFrom(params['inputFile'])
+    print(f'Number of data samples: {len(targets):d}')
+    # 3. pass inputs to the Perceptron for learning
+    percepter = Perceptron(params)
+    # 4. train and test the Perceptron
+    print(f'Training and testing based on {params["inputFile"]} data')
+    percepter.trainAndTest(inputs, targets)

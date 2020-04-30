@@ -56,7 +56,7 @@ class Perceptron(object):
 
     def train(self, inputs, targets):
         """Trains the weights using inputs and targets provided in the constructor"""
-        print('TRAINING:')
+        print('\nTRAINING:')
         categorizedTargets = self.categorize(targets)
         weights = self.initialize(len(inputs[0]))
         outputs = self.recall(inputs, weights)
@@ -68,17 +68,16 @@ class Perceptron(object):
             weights = self.learn(inputs, weights, outputs, categorizedTargets)
             error = self.getError(outputs, categorizedTargets)
             errorEpochs.append(error)
-            print('iteration ', iteration)
-            print('targets: ', categorizedTargets)
-            print('outputs: ', outputs)
-            print(f'accuracy: {int(self.calcuateAccuracy(outputs, targets) * 100)}%')
+            print(f'iteration {iteration}\ntargets: {categorizedTargets}\noutputs: {outputs}')
+            print(f'accuracy: {int(self.calcuateAccuracy(outputs, targets) * 100)}%\n')
             iteration += 1
+        print('Exit cause:')
         if iteration == self.maxIterations:
-            print('Exit cause: maximum iterations reached')
+            print('\tmaximum iterations reached')
         elif self.getError(outputs, categorizedTargets) == 0:
-            print('Exit cause: outputs matched targets')
+            print('\toutputs matched targets')
         else:
-            print('Exit cause: unknown (this should not happen)')
+            print('\tunknown (this should not happen)')
         return weights, outputs, errorEpochs
     
     def calcuateAccuracy(self, outputs, targets):
@@ -92,10 +91,11 @@ class Perceptron(object):
 
     def test(self, inputs, weights, targets):
         """Tests the trained weight matrix for accuracy"""
-        print(f'TESTING:\n\tinputs: {inputs}\n\ttargets: {targets}')
         outputs = self.recall(inputs, weights)
         accuracy = self.calcuateAccuracy(outputs, targets)
-        print(f'\toutputs: {self.contextualize(outputs)}\n\taccuracy: {int(accuracy * 100)}%')
+        print(f'\nTESTING:\n\ttargets: {targets} \
+                \n\toutputs: {self.contextualize(outputs)} \
+                \n\taccuracy: {int(accuracy * 100)}%')
     
     def split(self, inputs, targets):
         """Split data samples into training and testing sets"""
@@ -110,7 +110,9 @@ class Perceptron(object):
         """Split incoming samples, then train and test sample sets"""
         trainingInputs, trainingTargets, testInputs, testTargets = self.split(inputs, targets)
         weights, outputs, errorEpochs = self.train(trainingInputs, trainingTargets)
-        print(f'Training targets: {trainingTargets}\nTraining outputs: {self.contextualize(outputs)}')
+        print(f'\nFinal training state: \
+                \n\tTraining targets: {trainingTargets} \
+                \n\tTraining outputs: {self.contextualize(outputs)}')
         self.displayEpochs(errorEpochs)
         self.test(testInputs, weights, testTargets)
     

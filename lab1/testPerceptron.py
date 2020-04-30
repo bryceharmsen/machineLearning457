@@ -15,7 +15,7 @@ class PerceptronTests(unittest.TestCase):
         maxIterations = 1
         trainingPercentage = 0.5
         folds = 2
-        self.percepter = Perceptron(inputs,targets,learningRate,maxIterations, trainingPercentage, folds)
+        self.percepter = Perceptron(inputs, targets, learningRate, maxIterations, trainingPercentage, folds)
         self.rows = len(inputs)
         self.cols = len(inputs[0])
 
