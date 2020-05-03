@@ -6,9 +6,6 @@ from datetime import datetime
 class NeuralNetwork(object):
     def __init__(self, params):
         self.learningRate = params['learningRate']
-
-    def column(self, array, colIdx):
-        return [row[colIdx] for row in array]
     
     def appendExtraNodeTo(self, inputs):
         return [row + [-1] for row in inputs]
@@ -26,10 +23,7 @@ class NeuralNetwork(object):
         return weights
 
     def recall(self, inputs, weights):
-        inputs_T = np.transpose(inputs)
-        outputs = [np.dot(weights, self.column(inputs_T,i)) for i in range(len(inputs_T[0]))]
-        outputs = list(map(int, map(np.sign, outputs)))
-        return outputs
+        return list( map(lambda row: int(np.sign(np.dot(weights,row))), inputs))
     
     def calcuateAccuracy(self, outputs, targets):
         """Calculate accuracy of outputs matching targets for given samples"""

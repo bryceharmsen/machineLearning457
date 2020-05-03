@@ -1,5 +1,5 @@
 import numpy as np
-from neuralnet import NeuralNetwork
+from nn import NeuralNetwork
 
 class MultiLayerPerceptron(NeuralNetwork):
     def __init__(self):
