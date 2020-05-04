@@ -99,6 +99,7 @@ class SingleLayerPerceptron(NeuralNetwork):
     def trainAndTest(self, inputs, targets):
         """Split incoming samples, then train and test sample sets"""
         trainingInputs, trainingTargets, testInputs, testTargets = self.split(inputs, targets)
+        trainingInputs, testInputs = self.appendBiasNodeTo(trainingInputs), self.appendBiasNodeTo(testInputs)
         weights, outputs, errorEpochs = self.train(trainingInputs, trainingTargets)
         print(f'\nFinal training state: \
                 \n\tTraining targets: {trainingTargets} \

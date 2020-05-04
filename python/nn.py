@@ -6,8 +6,8 @@ from datetime import datetime
 class NeuralNetwork(object):
     def __init__(self, params):
         self.learningRate = params['learningRate']
-    
-    def appendExtraNodeTo(self, inputs):
+
+    def appendBiasNodeTo(self, inputs):
         return [row + [-1] for row in inputs]
 
     def initializeWeights(self, numInputs, numNeurons):
@@ -23,7 +23,7 @@ class NeuralNetwork(object):
         return weights
 
     def recall(self, inputs, weights):
-        return list( map(lambda row: int(np.sign(np.dot(weights,row))), inputs))
+        pass
     
     def calcuateAccuracy(self, outputs, targets):
         """Calculate accuracy of outputs matching targets for given samples"""

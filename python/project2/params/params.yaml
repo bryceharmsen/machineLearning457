@@ -1,1 +1,8 @@
 resultsPath: './project2/results'
+neuronsByLayer:
+    - 3
+    - 4
+learningRate: 0.2
+numSamples: 5
+trainingPercentage: 0.6
+beta: 3.0
