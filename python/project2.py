@@ -4,6 +4,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
+import shutil
 import util
 from mlp import MultiLayerPerceptron
 from mlpBookVersion import mlp
@@ -22,6 +23,10 @@ class Objective(object):
     def getSampleInputs(self, numSamples):
         return [[random.uniform(self.xDomain[0], self.xDomain[1]), \
                  random.uniform(self.yDomain[0], self.yDomain[1])] for j in range(numSamples)]
+    
+    def getSamples(self, numSamples):
+        sampleInputs = self.getSampleInputs(numSamples)
+        return [sample + [self.calculate(sample[0], sample[1])] for sample in sampleInputs]
 
 #should the objective function be passed
 #to the mlp as a param in the constructor?
@@ -52,6 +57,16 @@ def runMyMLP(params, inputs, objective):
 def runBookMLP():
     pass
 
+def generateARFF(fileName, samples):
+    #open file for writing
+    fullDestFilePath = f'./project2/data/{fileName}.arff'
+    shutil.copy2('./project2/starter.arff', fullDestFilePath)
+    with open(fullDestFilePath, 'a') as arff:
+        for sample in samples:
+            arff.write(f'{sample[0]},{sample[1]},{sample[2]}\n')
+    #write general information (attributes etc.)
+    #write sample data
+
 if __name__ == "__main__":
     params = util.getParams('./project2/params/params.yaml')
     print(params)
@@ -63,3 +78,4 @@ if __name__ == "__main__":
                                                                 #split these up into training and testing inputs
     runMyMLP(params, inputs, objective)
     runBookMLP()
+    generateARFF('samples', objective.getSamples(100))

@@ -1,0 +1,12 @@
+%
+%Supervised learning for a 3D
+%objective function
+%
+%
+
+@RELATION z
+
+@ATTRIBUTE x float
+@ATTRIBUTE y float
+
+@DATA
