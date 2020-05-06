@@ -54,8 +54,12 @@ def runMyMLP(params, inputs, objective):
     percepter = MultiLayerPerceptron(params, inputs)
     percepter.train(objective.outputDim)
 
-def runBookMLP():
-    pass
+def runBookMLP(params, samples, objective):
+    print(samples)
+    inputs = [row[:2] for row in samples]
+    targets = [row[2:] for row in samples]
+    percepter = mlp(inputs, targets, 2)
+    percepter.mlptrain(inputs, targets, params['learningRate'], params['maxIterations'])
 
 def generateARFF(fileName, samples):
     #open file for writing
@@ -74,8 +78,11 @@ if __name__ == "__main__":
     yDomain = [1, 100]
     objective = Objective(xDomain, yDomain)
     plotActual(xDomain, yDomain, objective.calculate, params['resultsPath'])
-    inputs = objective.getSampleInputs(int(params['numSamples'] * params['trainingPercentage'])) #get random (x,y) coords from input domain (how many? build training/testing sets)
+    numTrainingSamples = int(params['numSamples'] * params['trainingPercentage'])
+    numTestingSamples = params['numSamples'] - numTrainingSamples
+    inputs = objective.getSampleInputs(numTrainingSamples) #get random (x,y) coords from input domain (how many? build training/testing sets)
                                                                 #split these up into training and testing inputs
+    trainingSamples = objective.getSamples(numTrainingSamples)
     runMyMLP(params, inputs, objective)
-    runBookMLP()
+    runBookMLP(params, trainingSamples, objective)
     generateARFF('samples', objective.getSamples(100))

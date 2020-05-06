@@ -16,17 +16,20 @@ class mlp:
     def __init__(self,inputs,targets,nhidden,beta=1,momentum=0.9,outtype='logistic'):
         """ Constructor """
         # Set up network size
-        self.nin = np.shape(inputs)[1]
-        self.nout = np.shape(targets)[1]
-        self.ndata = np.shape(inputs)[0]
-        self.nhidden = nhidden
+        self.nin = np.shape(inputs)[1] #num input dimensions
+        self.nout = np.shape(targets)[1] #num target dimensions
+        self.ndata = np.shape(inputs)[0] #num input samples
+        self.nhidden = nhidden #num nodes in one hidden layer?
 
         self.beta = beta
         self.momentum = momentum
-        self.outtype = outtype
+        self.outtype = outtype #output function?
     
         # Initialise network
+        #random weights between inputs and hidden layer
+        #with each weight in interval [-sqrt(numInputs), +sqrt(numInputs)] ... normalized?
         self.weights1 = (np.random.rand(self.nin+1,self.nhidden)-0.5)*2/np.sqrt(self.nin)
+        #random weights (normalized) between hidden layer and output(s)
         self.weights2 = (np.random.rand(self.nhidden+1,self.nout)-0.5)*2/np.sqrt(self.nhidden)
 
     def earlystopping(self,inputs,targets,valid,validtargets,eta,niterations=100):
@@ -54,7 +57,7 @@ class mlp:
         """ Train the thing """    
         # Add the inputs that match the bias node
         inputs = np.concatenate((inputs,-np.ones((self.ndata,1))),axis=1)
-        change = list(range(self.ndata))
+        #change = list(range(self.ndata))
     
         updatew1 = np.zeros((np.shape(self.weights1)))
         updatew2 = np.zeros((np.shape(self.weights2)))
@@ -91,11 +94,11 @@ class mlp:
             
     def mlpfwd(self,inputs):
         """ Run the network forward """
-
+        #inputs to hidden layer
         self.hidden = np.dot(inputs,self.weights1)
         self.hidden = 1.0/(1.0+np.exp(-self.beta*self.hidden))
         self.hidden = np.concatenate((self.hidden,-np.ones((np.shape(inputs)[0],1))),axis=1)
-
+        #hidden layer to outputs TODO: build optional 2nd hidden layer here
         outputs = np.dot(self.hidden,self.weights2)
 
         # Different types of output neurons

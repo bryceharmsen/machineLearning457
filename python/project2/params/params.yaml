@@ -3,6 +3,7 @@ neuronsByLayer:
     - 3
     - 4
 learningRate: 0.2
-numSamples: 5
+numSamples: 500
 trainingPercentage: 0.6
+maxIterations: 5001
 beta: 3.0
