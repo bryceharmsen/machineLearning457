@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 import util
 from mlp import MultiLayerPerceptron
+from mlpBookVersion import mlp
 
 class Objective(object):
     def __init__(self, xDomain, yDomain):
@@ -30,27 +31,35 @@ def plotActual(xDomain, yDomain, objectiveFunc, savePath = '.'):
     figure = plt.figure()
     axis = figure.gca(projection='3d')
 
-    x = np.arange(xDomain[0], xDomain[1], 0.1)
-    y = np.arange(yDomain[0], yDomain[1], 0.1)
+    x = np.arange(xDomain[0], xDomain[1], 0.5)
+    y = np.arange(yDomain[0], yDomain[1], 0.5)
     x, y = np.meshgrid(x, y)
     z = objectiveFunc(x, y)
 
     surface = axis.plot_surface(x, y, z, cmap=cm.jet,
                                 linewidth=0, antialiased=False)
 
-    figure.colorbar(surface, shrink=0.5, aspect=5)
+    figure.colorbar(surface, shrink=0.5, aspect=5,)
     plt.savefig(f'{savePath}/objectivePlot.png')
     plt.show(block=False)
     plt.pause(2)
     plt.close()
 
-params = util.getParams('./project2/params/params.yaml')
-print(params)
-xDomain = [1, 100]
-yDomain = [1, 100]
-objective = Objective(xDomain, yDomain)
-plotActual([1, 100], [1,100], objective.calculate, params['resultsPath'])
-inputs = objective.getSampleInputs(params['numSamples']) #get random (x,y) coords from input domain (how many? build training/testing sets)
-                                                        #split these up into training and testing inputs
-percepter = MultiLayerPerceptron(params, inputs)
-percepter.train(objective.outputDim)
+def runMyMLP(params, inputs, objective):
+    percepter = MultiLayerPerceptron(params, inputs)
+    percepter.train(objective.outputDim)
+
+def runBookMLP():
+    pass
+
+if __name__ == "__main__":
+    params = util.getParams('./project2/params/params.yaml')
+    print(params)
+    xDomain = [1, 100]
+    yDomain = [1, 100]
+    objective = Objective(xDomain, yDomain)
+    plotActual(xDomain, yDomain, objective.calculate, params['resultsPath'])
+    inputs = objective.getSampleInputs(int(params['numSamples'] * params['trainingPercentage'])) #get random (x,y) coords from input domain (how many? build training/testing sets)
+                                                                #split these up into training and testing inputs
+    runMyMLP(params, inputs, objective)
+    runBookMLP()
