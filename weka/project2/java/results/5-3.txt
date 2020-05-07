@@ -1,0 +1,68 @@
+500 training instances loaded.
+500 testing instances loaded.
+Linear Node 0
+    Inputs    Weights
+    Threshold    -0.4216332650959228
+    Node 6    2.8190063676982757
+    Node 7    2.818639632616651
+    Node 8    2.813731338089075
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    -2.272885569289493
+    Attrib x    -1.0037788596644608
+    Attrib y    -0.8494069919716883
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -6.848828384607284
+    Attrib x    -3.618432372461719
+    Attrib y    -4.416578583869314
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -5.718884624336123
+    Attrib x    -2.965967668887952
+    Attrib y    -2.923294746579213
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    -1.8734146722662028
+    Attrib x    -1.0564625570784463
+    Attrib y    -0.8945930566750263
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    -2.239010454723867
+    Attrib x    -1.003378405737256
+    Attrib y    -0.8505169318017887
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -1.8443543416910342
+    Node 1    -1.1139672787609176
+    Node 2    -2.4118009599409826
+    Node 3    -1.8841404311465484
+    Node 4    -0.9307930838588918
+    Node 5    -1.096595791686455
+Sigmoid Node 7
+    Inputs    Weights
+    Threshold    -1.8474653509254266
+    Node 1    -1.0918350393537264
+    Node 2    -2.454789600317416
+    Node 3    -1.8391893936344985
+    Node 4    -0.9077484227041519
+    Node 5    -1.0972832037343507
+Sigmoid Node 8
+    Inputs    Weights
+    Threshold    -1.8528803276485688
+    Node 1    -1.1015294533174194
+    Node 2    -2.46203118699179
+    Node 3    -1.86210402321381
+    Node 4    -0.8580264405143999
+    Node 5    -1.0568041628437528
+Class 
+    Input
+    Node 0
+Results
+
+Correlation coefficient                  0.7914
+Mean absolute error                      0.6929
+Root mean squared error                  0.8284
+Relative absolute error                 72.1115 %
+Root relative squared error             67.4021 %
+Total Number of Instances              500     

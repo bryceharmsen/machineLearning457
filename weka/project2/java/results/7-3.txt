@@ -1,0 +1,84 @@
+500 training instances loaded.
+500 testing instances loaded.
+Linear Node 0
+    Inputs    Weights
+    Threshold    -0.4186894063853158
+    Node 8    2.809511455987908
+    Node 9    2.8161776384843957
+    Node 10    2.8063791560437648
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    -2.3633454140223416
+    Attrib x    -0.9579373899024267
+    Attrib y    -0.8473451455676333
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -2.319189800229591
+    Attrib x    -0.9063668027917218
+    Attrib y    -0.8236045301170929
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -2.3294749101782597
+    Attrib x    -0.9217591595400165
+    Attrib y    -0.8308309328160043
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    -2.7834554713817923
+    Attrib x    -1.250969403028119
+    Attrib y    -0.9930099207005364
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    -2.282931242530128
+    Attrib x    -0.8578578091450004
+    Attrib y    -0.8017598095680283
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -7.964102222027874
+    Attrib x    -4.188012375733447
+    Attrib y    -5.4469899100424435
+Sigmoid Node 7
+    Inputs    Weights
+    Threshold    -2.9984800491814885
+    Attrib x    -1.3823841302177138
+    Attrib y    -1.0674802968552395
+Sigmoid Node 8
+    Inputs    Weights
+    Threshold    -1.8398771409727532
+    Node 1    -0.7445978689338769
+    Node 2    -0.7059683203969624
+    Node 3    -0.6850188635701747
+    Node 4    -0.8788420695384553
+    Node 5    -0.6531289352996434
+    Node 6    -3.201346677076606
+    Node 7    -0.9813858167082353
+Sigmoid Node 9
+    Inputs    Weights
+    Threshold    -1.8261521322757943
+    Node 1    -0.736687561716113
+    Node 2    -0.7129976319276109
+    Node 3    -0.7506334972314219
+    Node 4    -0.9807065801868435
+    Node 5    -0.7263866515100874
+    Node 6    -3.130538138214606
+    Node 7    -1.0257866124005743
+Sigmoid Node 10
+    Inputs    Weights
+    Threshold    -1.8513641126424625
+    Node 1    -0.6632882617976381
+    Node 2    -0.6431354362698178
+    Node 3    -0.647324709333017
+    Node 4    -0.9273624227417854
+    Node 5    -0.6076712135701909
+    Node 6    -3.219535416756678
+    Node 7    -1.0358719528574245
+Class 
+    Input
+    Node 0
+Results
+
+Correlation coefficient                  0.7911
+Mean absolute error                      0.6933
+Root mean squared error                  0.8271
+Relative absolute error                 72.1556 %
+Root relative squared error             67.3037 %
+Total Number of Instances              500     
