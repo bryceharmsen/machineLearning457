@@ -85,4 +85,4 @@ if __name__ == "__main__":
     trainingSamples = objective.getSamples(numTrainingSamples)
     runMyMLP(params, inputs, objective)
     runBookMLP(params, trainingSamples, objective)
-    generateARFF('samples', objective.getSamples(100))
+    generateARFF('samples', objective.getSamples(params['numSamples']))
