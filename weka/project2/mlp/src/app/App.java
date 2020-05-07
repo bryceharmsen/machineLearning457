@@ -82,7 +82,7 @@ public class App {
             String bestFileName = "";
             for (String config : configs) {
                 options[options.length - 1] = config;
-                String fileName = config.replace(",", "");
+                String fileName = config.replace(",", "-");
                 double correlation = 0;
                 try {
                     correlation = this.executeTrial(Arrays.copyOf(options, options.length), fileName);
