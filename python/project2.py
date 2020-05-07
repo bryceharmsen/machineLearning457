@@ -1,5 +1,6 @@
 import math
 import random
+from datetime import datetime
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import matplotlib.pyplot as plt
@@ -72,6 +73,7 @@ def generateARFF(fileName, samples):
     #write sample data
 
 if __name__ == "__main__":
+    random.seed(datetime.now())
     params = util.getParams('./project2/params/params.yaml')
     print(params)
     xDomain = [1, 100]
