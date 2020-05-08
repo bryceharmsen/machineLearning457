@@ -1,0 +1,74 @@
+5000 training instances loaded.
+5000 testing instances loaded.
+Linear Node 0
+    Inputs    Weights
+    Threshold    -0.5298858473176197
+    Node 3    1.7528627148569211
+    Node 4    1.7476200761165355
+    Node 5    1.757713559223956
+    Node 6    1.7582943113224978
+    Node 7    1.7526812005206567
+    Node 8    1.743801842020197
+    Node 9    1.7538571194625738
+    Node 10    1.7531599839439111
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    -1.2121028714326678
+    Attrib x    -0.9947144789922026
+    Attrib y    -0.8497550600528493
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -5.970844445431057
+    Attrib x    -3.545016490712056
+    Attrib y    -3.344284104574847
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -2.234131887658996
+    Node 1    -1.0558821019278881
+    Node 2    -1.908828696239756
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    -2.232053065516515
+    Node 1    -1.10499705901767
+    Node 2    -1.8835901390176764
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    -2.2326708908442217
+    Node 1    -1.0600976797194452
+    Node 2    -1.9174683339786107
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -2.233686247731573
+    Node 1    -1.0399188499120264
+    Node 2    -1.9251865942395665
+Sigmoid Node 7
+    Inputs    Weights
+    Threshold    -2.234260311776582
+    Node 1    -1.0293146493179983
+    Node 2    -1.9213080522189525
+Sigmoid Node 8
+    Inputs    Weights
+    Threshold    -2.237491017720917
+    Node 1    -1.0435934244053056
+    Node 2    -1.8934995809938657
+Sigmoid Node 9
+    Inputs    Weights
+    Threshold    -2.2358697675678902
+    Node 1    -1.00733768322735
+    Node 2    -1.9288605589886467
+Sigmoid Node 10
+    Inputs    Weights
+    Threshold    -2.2366038938512887
+    Node 1    -1.0091171202842175
+    Node 2    -1.9249346989297083
+Class 
+    Input
+    Node 0
+Results
+
+Correlation coefficient                  0.788 
+Mean absolute error                      0.6575
+Root mean squared error                  0.7451
+Relative absolute error                 70.4816 %
+Root relative squared error             62.0155 %
+Total Number of Instances             5000     

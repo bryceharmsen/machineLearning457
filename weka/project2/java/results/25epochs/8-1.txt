@@ -1,0 +1,68 @@
+5000 training instances loaded.
+5000 testing instances loaded.
+Linear Node 0
+    Inputs    Weights
+    Threshold    -0.3509269821531941
+    Node 9    1.9651119093682539
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    -4.654464869925654
+    Attrib x    -2.290780604917312
+    Attrib y    -2.1168658962322495
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -1.8997586363180268
+    Attrib x    -0.5329719690419986
+    Attrib y    -0.4643829696214792
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -2.007014305076656
+    Attrib x    -0.5444251279837622
+    Attrib y    -0.4716774097402098
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    -2.044289392651401
+    Attrib x    -0.5492629036820365
+    Attrib y    -0.4753720557236795
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    -5.081845953901012
+    Attrib x    -2.6747635987594474
+    Attrib y    -2.483537990429235
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -1.7466919061274664
+    Attrib x    -0.4983162144932004
+    Attrib y    -0.4466186602824386
+Sigmoid Node 7
+    Inputs    Weights
+    Threshold    -1.935602010272238
+    Attrib x    -0.5364397869513065
+    Attrib y    -0.4664988799982922
+Sigmoid Node 8
+    Inputs    Weights
+    Threshold    -1.7453483351452435
+    Attrib x    -0.4931331374290704
+    Attrib y    -0.44326440014896035
+Sigmoid Node 9
+    Inputs    Weights
+    Threshold    0.5297603205157964
+    Node 1    -2.3691837815089496
+    Node 2    -0.831043493943315
+    Node 3    -0.8908382698064449
+    Node 4    -0.9102585850827147
+    Node 5    -2.7960131560818677
+    Node 6    -0.6997238565756583
+    Node 7    -0.8496486796709823
+    Node 8    -0.6910346738837463
+Class 
+    Input
+    Node 0
+Results
+
+Correlation coefficient                  0.7861
+Mean absolute error                      0.6595
+Root mean squared error                  0.749 
+Relative absolute error                 70.6979 %
+Root relative squared error             62.3442 %
+Total Number of Instances             5000     

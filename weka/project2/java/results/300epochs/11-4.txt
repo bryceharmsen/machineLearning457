@@ -1,0 +1,131 @@
+5000 training instances loaded.
+5000 testing instances loaded.
+Linear Node 0
+    Inputs    Weights
+    Threshold    -0.3657336832245964
+    Node 12    3.642220120890046
+    Node 13    3.6404328315331465
+    Node 14    3.6563800625972
+    Node 15    3.635170407205264
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    -4.773437739263705
+    Attrib x    -2.555983330641002
+    Attrib y    -2.3658417752389354
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -3.2454654153830043
+    Attrib x    -0.7000962393764881
+    Attrib y    -0.6536175312096407
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -2.9037470702257866
+    Attrib x    -0.6376171935740742
+    Attrib y    -0.5978329567764733
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    -2.906436951482771
+    Attrib x    -0.6376154375555351
+    Attrib y    -0.5977194985289636
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    -2.905134330130787
+    Attrib x    -0.6376014011985913
+    Attrib y    -0.5977360229912054
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -11.470938864334512
+    Attrib x    -6.234240140723055
+    Attrib y    -6.016455901486664
+Sigmoid Node 7
+    Inputs    Weights
+    Threshold    -2.9084905431071797
+    Attrib x    -0.63763560979161
+    Attrib y    -0.5976895431256152
+Sigmoid Node 8
+    Inputs    Weights
+    Threshold    -2.9085797793861645
+    Attrib x    -0.6376492482260809
+    Attrib y    -0.5977249418751763
+Sigmoid Node 9
+    Inputs    Weights
+    Threshold    -2.9071305821350597
+    Attrib x    -0.6376451687936754
+    Attrib y    -0.597768081894389
+Sigmoid Node 10
+    Inputs    Weights
+    Threshold    -2.9028821880331046
+    Attrib x    -0.637618770079286
+    Attrib y    -0.5978705248152498
+Sigmoid Node 11
+    Inputs    Weights
+    Threshold    -2.9170612042123816
+    Attrib x    -0.6376901725442231
+    Attrib y    -0.5975046861077531
+Sigmoid Node 12
+    Inputs    Weights
+    Threshold    -2.358006269747276
+    Node 1    -1.201033115494441
+    Node 2    -0.9397152634771857
+    Node 3    -0.6871492589103028
+    Node 4    -0.7133091773139735
+    Node 5    -0.7396317993890602
+    Node 6    -4.4453707330573
+    Node 7    -0.6986475549015337
+    Node 8    -0.6858069677209879
+    Node 9    -0.7349108715196547
+    Node 10    -0.7167910197540309
+    Node 11    -0.7462591936415777
+Sigmoid Node 13
+    Inputs    Weights
+    Threshold    -2.3655700376708113
+    Node 1    -1.1498782559824496
+    Node 2    -0.9122955713626008
+    Node 3    -0.7118591099373691
+    Node 4    -0.7023551487815574
+    Node 5    -0.7040584797738794
+    Node 6    -4.486375008834094
+    Node 7    -0.6869659272353988
+    Node 8    -0.7174418920559673
+    Node 9    -0.66252701149376
+    Node 10    -0.6836772394864196
+    Node 11    -0.7257319335548367
+Sigmoid Node 14
+    Inputs    Weights
+    Threshold    -2.300208010779101
+    Node 1    -1.2004833629974405
+    Node 2    -0.9390625301747995
+    Node 3    -0.8970866566119756
+    Node 4    -0.8602610753628755
+    Node 5    -0.8491192627840177
+    Node 6    -4.33044333330616
+    Node 7    -0.8711300073470984
+    Node 8    -0.8844786610207703
+    Node 9    -0.8898146117829266
+    Node 10    -0.9043930641979677
+    Node 11    -0.8283375021220041
+Sigmoid Node 15
+    Inputs    Weights
+    Threshold    -2.38773782455648
+    Node 1    -1.218621514191624
+    Node 2    -0.8885601754697047
+    Node 3    -0.6204353843825268
+    Node 4    -0.6459547439901081
+    Node 5    -0.624962612439781
+    Node 6    -4.500519058548021
+    Node 7    -0.6715983037498066
+    Node 8    -0.6424610066883677
+    Node 9    -0.639277288879092
+    Node 10    -0.6100109373495515
+    Node 11    -0.6527895932644326
+Class 
+    Input
+    Node 0
+Results
+
+Correlation coefficient                  0.7918
+Mean absolute error                      0.6538
+Root mean squared error                  0.7406
+Relative absolute error                 70.0843 %
+Root relative squared error             61.6444 %
+Total Number of Instances             5000     

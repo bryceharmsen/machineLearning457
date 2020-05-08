@@ -1,0 +1,22 @@
+5000 training instances loaded.
+5000 testing instances loaded.
+Linear Node 0
+    Inputs    Weights
+    Threshold    -0.7669158707658187
+    Node 1    1.5195663740712182
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    2.1231805433119373
+    Attrib x    1.555350439009499
+    Attrib y    1.3039074423537549
+Class 
+    Input
+    Node 0
+Results
+
+Correlation coefficient                  0.7799
+Mean absolute error                      0.6707
+Root mean squared error                  0.7731
+Relative absolute error                 71.9015 %
+Root relative squared error             64.3439 %
+Total Number of Instances             5000     

@@ -1,0 +1,76 @@
+5000 training instances loaded.
+5000 testing instances loaded.
+Linear Node 0
+    Inputs    Weights
+    Threshold    -0.5286636544905351
+    Node 1    0.9770173641678326
+    Node 2    0.9265229378414882
+    Node 3    0.9957985715202944
+    Node 4    0.9811785761658567
+    Node 5    0.9953925473873503
+    Node 6    1.013447966028232
+    Node 7    0.9697201749143592
+    Node 8    0.906234023420496
+    Node 9    0.9902284085367137
+    Node 10    1.0365601461203915
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    -2.2688647103126267
+    Attrib x    0.2922692047146406
+    Attrib y    0.25650200225207115
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -2.2937382750132183
+    Attrib x    0.33804076972541475
+    Attrib y    0.2021676972774914
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -2.2427925247199187
+    Attrib x    0.39604912220969596
+    Attrib y    0.1471948601829446
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    -2.2618039268836654
+    Attrib x    0.324670829241599
+    Attrib y    0.22244369397879762
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    -2.2298700128064484
+    Attrib x    0.39402647601209295
+    Attrib y    0.15103876567726493
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -2.259906703224011
+    Attrib x    0.5651303095140328
+    Attrib y    -0.044436390155675055
+Sigmoid Node 7
+    Inputs    Weights
+    Threshold    -2.271809077435954
+    Attrib x    0.35109424093082053
+    Attrib y    0.19205306218433302
+Sigmoid Node 8
+    Inputs    Weights
+    Threshold    -1.615895173252693
+    Attrib x    -0.8525514807273902
+    Attrib y    1.5765985495813353
+Sigmoid Node 9
+    Inputs    Weights
+    Threshold    -2.2573005143945704
+    Attrib x    0.3906632969324103
+    Attrib y    0.15112556912703357
+Sigmoid Node 10
+    Inputs    Weights
+    Threshold    -2.027244129889566
+    Attrib x    1.2699470106141533
+    Attrib y    -0.83442085535817
+Class 
+    Input
+    Node 0
+Results
+
+Correlation coefficient                  0.7315
+Mean absolute error                      0.7516
+Root mean squared error                  0.917 
+Relative absolute error                 80.5698 %
+Root relative squared error             76.3249 %
+Total Number of Instances             5000     

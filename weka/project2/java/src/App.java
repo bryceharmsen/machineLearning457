@@ -22,7 +22,6 @@ public class App {
     public double executeTrial(String[] options, String fileName) throws Exception, IOException {
         System.out.println(fileName);
         File resultsFile = new File("../results/" + fileName + ".txt");
-
         FileWriter writer = new FileWriter(resultsFile);
 
         DataSource trainSource = new DataSource(this.TRAIN_SAMPLES_FILE),
@@ -69,16 +68,19 @@ public class App {
 
     public void run() throws Exception {
         try {
+            //0.3 learning rate
+            //0.2 momentum
+            //10 epochs
             String[] options = {
                 "-L", "0.3", "-M", "0.2",
-                "-N", "500", "-V", "0", 
+                "-N", "5000", "-V", "0", 
                 "-S", "0", "-E", "20", 
                 "-H", "1"
             };
             int minNeuron = 0, maxNeuron = 19,
                 minLayer = 1, maxLayer = 2;
             String[] configs = this.getNeuronConfigurations(minNeuron, maxNeuron, minLayer, maxLayer);
-            double bestCorrelation = 0;
+            double bestCorrelation = -1;
             String bestFileName = "NO FILE CREATED";
             for (String config : configs) {
                 options[options.length - 1] = config;

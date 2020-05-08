@@ -1,0 +1,70 @@
+5000 training instances loaded.
+5000 testing instances loaded.
+Linear Node 0
+    Inputs    Weights
+    Threshold    0.4323964887490582
+    Node 1    1.0086760468335114
+    Node 2    1.2430699418332485
+    Node 3    -2.554650058149861
+    Node 4    1.2739677107920149
+    Node 5    -1.7186490483951584
+    Node 6    1.0661989903314806
+    Node 7    1.2946463227970681
+    Node 8    -1.4419962377324713
+    Node 9    1.2617177383275484
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    -4.308999225384084
+    Attrib x    -2.037956844657237
+    Attrib y    0.7842272902155907
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -3.695515294369416
+    Attrib x    0.3301120169872915
+    Attrib y    1.056926290324972
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -6.339141751587604
+    Attrib x    -2.5621322360942624
+    Attrib y    -2.590516298420095
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    -3.6380129769171434
+    Attrib x    0.5029895065914073
+    Attrib y    0.8638660243787457
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    -3.7160749386511815
+    Attrib x    -1.2267961239841134
+    Attrib y    -1.1053217687564751
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -3.8397796569473615
+    Attrib x    0.9715548254541835
+    Attrib y    -1.9441450823170765
+Sigmoid Node 7
+    Inputs    Weights
+    Threshold    -3.596522327558447
+    Attrib x    0.7647947450738589
+    Attrib y    0.5404871201717448
+Sigmoid Node 8
+    Inputs    Weights
+    Threshold    -3.4150063992340645
+    Attrib x    -1.1458491400002955
+    Attrib y    -1.0098272866827098
+Sigmoid Node 9
+    Inputs    Weights
+    Threshold    -3.5732623341252125
+    Attrib x    0.76162270030734
+    Attrib y    0.5451024755918937
+Class 
+    Input
+    Node 0
+Results
+
+Correlation coefficient                  0.7997
+Mean absolute error                      0.6502
+Root mean squared error                  0.7297
+Relative absolute error                 69.6974 %
+Root relative squared error             60.7347 %
+Total Number of Instances             5000     

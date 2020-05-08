@@ -1,0 +1,183 @@
+5000 training instances loaded.
+5000 testing instances loaded.
+Linear Node 0
+    Inputs    Weights
+    Threshold    -0.45378843710526695
+    Node 14    1.7047185525683906
+    Node 15    1.7062769873688062
+    Node 16    1.7035662576963968
+    Node 17    1.7015119743106908
+    Node 18    1.6969731287338095
+    Node 19    1.7083817638902472
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    -1.5751068629793208
+    Attrib x    -0.378136428499747
+    Attrib y    -0.352751160996098
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -1.6488424071676964
+    Attrib x    -0.4499362551541983
+    Attrib y    -0.41301778412043677
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -1.587394716739064
+    Attrib x    -0.3903999423856208
+    Attrib y    -0.36272773875160375
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    -1.5918127488689116
+    Attrib x    -0.3943226322307382
+    Attrib y    -0.3658161579478139
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    -1.5739871367371856
+    Attrib x    -0.379926534806042
+    Attrib y    -0.35426767857254443
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -2.2560573555930676
+    Attrib x    -0.8222555762346136
+    Attrib y    -0.7376026661626854
+Sigmoid Node 7
+    Inputs    Weights
+    Threshold    -6.280053783446829
+    Attrib x    -3.7256991799441566
+    Attrib y    -3.5169610405755183
+Sigmoid Node 8
+    Inputs    Weights
+    Threshold    -1.6076916791131757
+    Attrib x    -0.412982563109179
+    Attrib y    -0.3816598846825804
+Sigmoid Node 9
+    Inputs    Weights
+    Threshold    -3.0770644527377766
+    Attrib x    -1.3942365125558234
+    Attrib y    -1.26954192378202
+Sigmoid Node 10
+    Inputs    Weights
+    Threshold    -1.5602753626763748
+    Attrib x    -0.34782274868639684
+    Attrib y    -0.3263531474110723
+Sigmoid Node 11
+    Inputs    Weights
+    Threshold    -1.6567999043037493
+    Attrib x    -0.45465108842615093
+    Attrib y    -0.41693818660493653
+Sigmoid Node 12
+    Inputs    Weights
+    Threshold    -1.5605718623550522
+    Attrib x    -0.33722289144567297
+    Attrib y    -0.3171962515611758
+Sigmoid Node 13
+    Inputs    Weights
+    Threshold    -1.6239305156994455
+    Attrib x    -0.4279730977156478
+    Attrib y    -0.39458461201589934
+Sigmoid Node 14
+    Inputs    Weights
+    Threshold    -1.7623370634459952
+    Node 1    -0.20208051276424174
+    Node 2    -0.22683797432471714
+    Node 3    -0.25205791935837096
+    Node 4    -0.23393482883452046
+    Node 5    -0.2255957354802104
+    Node 6    -0.34220403504824426
+    Node 7    -2.0982623864845373
+    Node 8    -0.21849131797642574
+    Node 9    -0.6280185351780768
+    Node 10    -0.26357318759428033
+    Node 11    -0.2201475333359834
+    Node 12    -0.2461305697142324
+    Node 13    -0.24529450183719087
+Sigmoid Node 15
+    Inputs    Weights
+    Threshold    -1.76305134558326
+    Node 1    -0.23197713408811524
+    Node 2    -0.27581463134627826
+    Node 3    -0.21140479257620298
+    Node 4    -0.2381454924788239
+    Node 5    -0.21065545915412814
+    Node 6    -0.32363129924730444
+    Node 7    -2.130092547109941
+    Node 8    -0.22672226401328704
+    Node 9    -0.5989366479147032
+    Node 10    -0.2156261049455668
+    Node 11    -0.27478937662698466
+    Node 12    -0.20994363131059518
+    Node 13    -0.22632691965641769
+Sigmoid Node 16
+    Inputs    Weights
+    Threshold    -1.7468376927087406
+    Node 1    -0.23902775852883842
+    Node 2    -0.2623367159005641
+    Node 3    -0.2573629074974838
+    Node 4    -0.24451291817945137
+    Node 5    -0.22627027166798339
+    Node 6    -0.3999869411920903
+    Node 7    -2.1133695694500747
+    Node 8    -0.2544762066556797
+    Node 9    -0.5492950397964516
+    Node 10    -0.21688397182152264
+    Node 11    -0.2160204107417695
+    Node 12    -0.22954113272175222
+    Node 13    -0.2603423451250512
+Sigmoid Node 17
+    Inputs    Weights
+    Threshold    -1.7485348940408496
+    Node 1    -0.24719156162397463
+    Node 2    -0.20479063311822499
+    Node 3    -0.26670362210303156
+    Node 4    -0.24885059568089235
+    Node 5    -0.2565371015896628
+    Node 6    -0.3644550790818827
+    Node 7    -2.087450010973683
+    Node 8    -0.2313533495740986
+    Node 9    -0.6217088736393804
+    Node 10    -0.27761546883736543
+    Node 11    -0.25400709248465025
+    Node 12    -0.1996681079457752
+    Node 13    -0.2213895551523525
+Sigmoid Node 18
+    Inputs    Weights
+    Threshold    -1.735433658456989
+    Node 1    -0.2809269997517495
+    Node 2    -0.29436916544284353
+    Node 3    -0.2117042636844785
+    Node 4    -0.2595403775329746
+    Node 5    -0.2287564531130705
+    Node 6    -0.4162581872578416
+    Node 7    -2.0432283982574395
+    Node 8    -0.25577059052692813
+    Node 9    -0.6304676343243573
+    Node 10    -0.21266233825374925
+    Node 11    -0.24585427961499534
+    Node 12    -0.2469200504403367
+    Node 13    -0.2601761596455863
+Sigmoid Node 19
+    Inputs    Weights
+    Threshold    -1.7763100658480586
+    Node 1    -0.19072729904584487
+    Node 2    -0.20265548955791365
+    Node 3    -0.20839581462561768
+    Node 4    -0.19347548840115422
+    Node 5    -0.2416464760559497
+    Node 6    -0.37454330462041224
+    Node 7    -2.1418274036289087
+    Node 8    -0.24393885221585154
+    Node 9    -0.5780219941094606
+    Node 10    -0.19783076828102228
+    Node 11    -0.258653437338408
+    Node 12    -0.2461657256201197
+    Node 13    -0.22541785640109158
+Class 
+    Input
+    Node 0
+Results
+
+Correlation coefficient                  0.7893
+Mean absolute error                      0.6558
+Root mean squared error                  0.7424
+Relative absolute error                 70.3004 %
+Root relative squared error             61.7918 %
+Total Number of Instances             5000     

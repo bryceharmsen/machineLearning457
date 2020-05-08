@@ -22,8 +22,12 @@ class Objective(object):
                + np.log(x**2 + y**2)
 
     def getSampleInputs(self, numSamples):
-        return [[random.uniform(self.xDomain[0], self.xDomain[1]), \
-                 random.uniform(self.yDomain[0], self.yDomain[1])] for j in range(numSamples)]
+        random.seed(datetime.now())
+        x = [random.uniform(self.xDomain[0], self.xDomain[1]) for i in range(numSamples)]
+        random.seed(datetime.now())
+        y = [random.uniform(self.yDomain[0], self.yDomain[1]) for i in range(numSamples)]
+        samples = [[x[i], y[i]] for i in range(numSamples)]
+        return samples
     
     def getSamples(self, numSamples):
         sampleInputs = self.getSampleInputs(numSamples)
@@ -73,7 +77,6 @@ def generateARFF(fileName, samples):
     #write sample data
 
 if __name__ == "__main__":
-    random.seed(datetime.now())
     params = util.getParams('./project2/params/params.yaml')
     print(params)
     xDomain = [1, 100]
@@ -85,6 +88,6 @@ if __name__ == "__main__":
     inputs = objective.getSampleInputs(numTrainingSamples) #get random (x,y) coords from input domain (how many? build training/testing sets)
                                                                 #split these up into training and testing inputs
     trainingSamples = objective.getSamples(numTrainingSamples)
-    runMyMLP(params, inputs, objective)
-    runBookMLP(params, trainingSamples, objective)
+    #runMyMLP(params, inputs, objective)
+    #runBookMLP(params, trainingSamples, objective)
     generateARFF('samples', objective.getSamples(params['numSamples']))
