@@ -1,5 +1,5 @@
-#ifndef GEN_ALG
-#define GEN_ALG
+#ifndef GEN_ALG_H
+#define GEN_ALG_H
 #include "../UTIL/arrMtx.h"
 #include "../UTIL/benchmarks.h"
 #include "../UTIL/randMT.h"
