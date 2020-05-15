@@ -38,7 +38,7 @@ void reduce(solutionArr *population, solutionArr *newPopulation, int elitismNum)
 void tournamentSelect(dblMtx *population, dblArr *solutions, dblMtx *parents);
 void rouletteSelect(dblMtx *population, dblArr *solutions, dblMtx *parents);
 void rankSelect(dblMtx *population, dblArr *solutions, dblMtx *parents);
-void select(dblMtx *population, dblArr *solutions, dblMtx *parents, char selectOption);
+void abstractSelect(dblMtx *population, dblArr *solutions, dblMtx *parents, char selectOption);
 int selectParent(dblArr *fitnesses, double totalFitness);
 void getFitnesses(dblArr *solutions, dblArr *fitnesses);
 double getFitness(dblArr *solutions, dblArr *fitnesses);

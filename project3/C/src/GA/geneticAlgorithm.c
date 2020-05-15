@@ -5,7 +5,6 @@
 #include "../GA/geneticAlgorithm.h"
 #include "../UTIL/benchmarks.h"
 #include "../UTIL/fileIO.h"
-#include "../UTIL/fileIO.h"
 
 #define max(a,b) (((a) > (b)) ? (a) : (b))
 #define min(a,b) (((a) < (b)) ? (a) : (b))
@@ -229,7 +228,7 @@ void rankSelect(dblMtx *population, dblArr *solutions, dblMtx *parents) {
  * @param selectOptions The type of selection method. Either 'r' (roulette), 't' (tournament),
  * or 'k' (rank).
  */
-void select(dblMtx *population, dblArr *solutions, dblMtx *parents, char selectOption) {
+void abstractSelect(dblMtx *population, dblArr *solutions, dblMtx *parents, char selectOption) {
     switch(selectOption) {
         default:
             printf("Selection defaulting to roulette select...\n");
@@ -377,7 +376,7 @@ void geneticAlgorithm(GAinputs *inputs, dblArr *bestSolutions) {
         dblMtx newPopulation = createEmptyMatrix(newPopulationPtr, inputs->population * offspringMultiplier, inputs->dimension);
         for(int s = 0; s < inputs->population - 1; s += 2) {
             //select parents based on selection method chosen in switch
-            select(&population, &solutions, &parents, inputs->select);
+            abstractSelect(&population, &solutions, &parents, inputs->select);
             //perform crossover with probability CR
             crossover(&parents, &offspring, inputs->crossoverRate, inputs->numCrossovers);
             //perform mutation with mutation parameters M

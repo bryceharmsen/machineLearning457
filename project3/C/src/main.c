@@ -72,7 +72,7 @@ int workFlow(char* input, char* output) {
         }
         endTime = clock();
         duration = difftime(endTime, startTime);//((double) (endTime - startTime)) / (CLOCKS_PER_SEC / 1000.0);
-        printf("time: %lf\n", duration);
+        printf("time: %ld\n", duration);
 
         fprintf(outFilePtr,"\n");
         free(times);

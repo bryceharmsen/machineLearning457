@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <float.h>
 #include <math.h>
-#include "fileIO.h" ////////DELETE///////////
 #include "arrMtx.h"
 #include "benchmarks.h"
 

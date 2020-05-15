@@ -103,7 +103,7 @@ void csvMtxWriter(FILE* filePtr, dblMtx matrix) {
  * @return The pointer to the open file
  */
 FILE* csvLineWriter(FILE* filePtr, solution sln, unsigned int duration) {
-	fprintf(filePtr, "%g,%lf,", duration, sln.fitness);
+	fprintf(filePtr, "%d,%lf,", duration, sln.fitness);
 	for(int i = 0; i < sln.input.length; i++) {
 		fprintf(filePtr, "%lf,", sln.input.ptr[i]);
 	}

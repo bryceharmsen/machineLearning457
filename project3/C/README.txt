@@ -23,7 +23,7 @@
  
  To compile and link from the command-line
  ----------------------------------------------------------------- 
- gcc -O3 -fno-strict-aliasing -DHAVE_SSE2=1 -DSFMT_MEXP=19937 -o proj3 SFMT1.5.1\SFMT.c UTIL\arrMtx.c UTIL\benchmarkFunctions.c UTIL\fileIO.c UTIL\randMT.c GA\geneticAlgorithm.c DE\differentialEvolution.c main.c 
+ gcc -O3 -fno-strict-aliasing -DHAVE_SSE2=1 -DSFMT_MEXP=19937 -o proj3 SFMT1.5.1\SFMT.c UTIL\arrMtx.c UTIL\benchmarkFunctions.c UTIL\fileIO.c UTIL\randMT.c GA\geneticAlgorithm.c main.c 
  
  
  Example run from the command-line
