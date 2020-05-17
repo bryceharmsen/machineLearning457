@@ -71,13 +71,10 @@ class GA(metaclass=abc.ABCMeta):
         '''Runs genetic algorithm for the number of generations defined in the object creation.'''
         chromosomes = self.createChromosomes()
         chromosomes = self.setFitnesses(chromosomes)
-        bestChrom = self.getMostFitChromosome(chromosomes)
-        bestChromByGen = [bestChrom]
+        bestChromByGen = [self.getMostFitChromosome(chromosomes)]
         for _ in range(1, self.generations):
             chromosomes = self.getNextGeneration(chromosomes)
-            newBestChrom = self.getMostFitChromosome(chromosomes)
-            bestChromByGen.append(newBestChrom)
-            if newBestChrom.fitness > bestChrom.fitness:
-                bestChrom = newBestChrom
+            bestChromByGen.append(self.getMostFitChromosome(chromosomes))
         #report most fit chromosome
         #report most fit for each generation
+        return bestChromByGen
