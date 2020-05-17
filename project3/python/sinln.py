@@ -1,13 +1,13 @@
 import sys
 import math
 import numpy as np
+from types import SimpleNamespace
 import util
-from ga_objective import GA, Chrom, ChromList
+from ga import GA, Chrom, ChromList
 
 class SinLn(GA):
-    def __init__(self, params):
-        self.populationSize = params['populationSize']
-        super().__init__(params)
+    def __init__(self, generations, populationSize, mutationRate):
+        super(SinLn, self).__init__(generations, populationSize, mutationRate)
     
     def f(self, x, y):
         return np.sin(math.pi * 10 * x + 10/(1 + y**2)) \
@@ -35,5 +35,5 @@ if __name__ == "__main__":
     if (len(sys.argv) != 2):
         print(f'Proper use:\n\tpython3 {sys.argv[0]} PARAM_FILENAME.yaml')
     params = util.getParams(sys.argv[1])
-    ga = SinLn(params)
+    ga = SinLn(params.generations, params.populationSize, params.mutationRate)
     ga.run()
