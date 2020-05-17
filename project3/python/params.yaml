@@ -1,4 +1,4 @@
-chromosomes: 100
+populationSize: 100
 generations: 100
 mutationRate: 0.01
 crossoverRate: 0.2

@@ -17,7 +17,7 @@ class GA:
         self.mutationRate = params['mutationRate']
         self.crossoverRate = params['crossoverRate']
         self.xDomain = params['xDomain']
-        self.yDomian = params['yDomain']
+        self.yDomain = params['yDomain']
         self.f = objectiveFunc
 
     def select(self):
@@ -47,18 +47,22 @@ class GA:
         return chromosomes, fitnesses
 
     def createInitGen(self):
+        '''Creates the first generation of self.chromosomes number of chromosomes randomly based on the x and y domains'''
         xChroms = np.random.uniform(self.xDomain[0], self.xDomain[1], (self.chromosomes,1))
-        yChroms = np.random.uniform(self.yDomian[0], self.yDomian[1], (self.chromosomes,1))
+        yChroms = np.random.uniform(self.yDomain[0], self.yDomain[1], (self.chromosomes,1))
         return np.concatenate((xChroms, yChroms), axis=1)
 
     def getFitness(self, chromosomes):
+        '''Calculates the fitness value for each [x, y] pair'''
         return self.f(chromosomes[:,:1], chromosomes[:,1:])
 
     def getBest(self, chromosomes, fitnesses):
+        '''Creates and returns a ChromRecord object for the most fit chromosome in the given population.'''
         bestFitIdx = np.argmax(fitnesses)
         return ChromRecord(chromosomes[bestFitIdx], fitnesses[bestFitIdx])
 
     def run(self):
+        '''Runs genetic algorithm for the number of generations defined in the object creation.'''
         #build initial population
         chromosomes = self.createInitGen()
         fitnesses = self.getFitness(chromosomes)
