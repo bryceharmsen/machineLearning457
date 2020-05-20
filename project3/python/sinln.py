@@ -2,6 +2,7 @@ import sys
 import math
 import numpy as np
 import random
+from datetime import datetime
 import copy
 from types import SimpleNamespace
 from operator import attrgetter
@@ -13,6 +14,8 @@ class SinLn(GA):
     def __init__(self, generations, populationSize, mutationRate, xDomain, yDomain, **kwargs):
         self.xDomain = xDomain
         self.yDomain = yDomain
+        random.seed(datetime.now())
+        np.random.seed(int(datetime.timestamp(datetime.now())))
         super(SinLn, self).__init__(generations, populationSize, mutationRate)
     
     def f(self, x, y):
@@ -131,11 +134,16 @@ if __name__ == "__main__":
         print(f'Proper use:\n\tpython3 {sys.argv[0]} PARAM_FILENAME.yaml')
     params = util.getParams(sys.argv[1])
     ga = SinLn(**params)
+    plotter.plot3d(ga.xDomain, ga.yDomain, ga.f)
     bestChromsByGen = ga.run()
-    plotter.plot2d(
+    plotter.plot2dTimeSeries(
         [chrom.fitness for chrom in bestChromsByGen],
         'Best Chromosome By Generation',
         'generation',
-        'z-value',
-        tickFreq=10
+        'z-value'
     )
+    plotter.plot2dScatter(
+        [chrom.alleles[0] for chrom in bestChromsByGen],
+        [chrom.alleles[1] for chrom in bestChromsByGen]
+    )
+    print(f'best chromosomes: {[chrom.alleles for chrom in bestChromsByGen]}')

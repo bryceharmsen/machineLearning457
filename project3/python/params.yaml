@@ -1,6 +1,5 @@
-populationSize: 100
-generations: 100
-mutationRate: 0.05
-crossoverRate: 0.2
+populationSize: 1200
+generations: 40
+mutationRate: 0.25
 xDomain: [3, 10]
 yDomain: [4, 8]
