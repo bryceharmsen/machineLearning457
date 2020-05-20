@@ -22,6 +22,7 @@ class SinLn(GA):
 
     def select(self, chromosomes: ChromList) -> ChromList:
         #which form of select? rank (no), roulette, tournament?
+        
         pass
 
     def crossover(self, parents: ChromList) -> ChromList:
@@ -58,8 +59,18 @@ class SinLn(GA):
             #mutate some portion (small portion, like a bit or x or y val)
             #of the current offspring
             #mutation idx from uniform random as well
+        #BASIC
+        for chrom in offspring:
+            randRate = random.uniform(0, 1)
+            if randRate < self.mutationRate:
+                print(f'mutated chrom {chrom.alleles}')
+                idx = np.random.randint(0, 2)
+                if idx == 0:
+                    chrom.alleles[idx] = random.uniform(*self.xDomain)
+                else:
+                    chrom.alleles[idx] = random.uniform(*self.yDomain)
+                print(f'new alleles: {chrom.alleles}')
         return offspring
-        pass
 
     def setFitnesses(self, chromosomes: ChromList) -> ChromList:
         for chrom in chromosomes:

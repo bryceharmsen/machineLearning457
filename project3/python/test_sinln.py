@@ -1,6 +1,7 @@
 import unittest
 from sinln import SinLn, Chrom
 from types import SimpleNamespace
+from operator import attrgetter
 import numpy as np
 import math
 import util
@@ -8,6 +9,7 @@ import copy
 
 NUM_ALLELES = 2
 OFFSPRING_MULTIPLIER = 2
+VARIANCE_PERCENTAGE = 0.05
 
 class SinLnTests(unittest.TestCase):
     def setUp(self):
@@ -79,6 +81,20 @@ class SinLnTests(unittest.TestCase):
         chromosomes = self.ga.createChromosomes()
         nextGenChroms = self.ga.crossover(chromosomes)
         self.assertEqual(len(nextGenChroms), len(chromosomes) * OFFSPRING_MULTIPLIER)
+
+    def testMutateNumberOfChanges(self):
+        chromosomes = self.ga.createChromosomes()
+        mutatedChroms = self.ga.mutate(copy.deepcopy(chromosomes))
+        mutatedChromsCount = 0
+        for i in range(len(chromosomes)):
+            if chromosomes[i].alleles != mutatedChroms[i].alleles:
+                print(f'TEST: {chromosomes[i].alleles} != {mutatedChroms[i].alleles}')
+                mutatedChromsCount += 1
+        print(f'{mutatedChromsCount} out of {len(chromosomes)} mutated.')
+        variance = VARIANCE_PERCENTAGE*len(chromosomes)
+        expectedMutations = self.ga.mutationRate * len(chromosomes)
+        self.assertLessEqual(mutatedChromsCount, expectedMutations + variance)
+        self.assertGreaterEqual(mutatedChromsCount, expectedMutations - variance)
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,6 +1,6 @@
 populationSize: 100
 generations: 100
-mutationRate: 0.01
+mutationRate: 0.05
 crossoverRate: 0.2
 xDomain: [3, 10]
 yDomain: [4, 8]
