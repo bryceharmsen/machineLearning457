@@ -72,7 +72,7 @@ class GA(metaclass=abc.ABCMeta):
         chromosomes = self.createChromosomes()
         chromosomes = self.setFitnesses(chromosomes)
         bestChromByGen = [self.getMostFitChromosome(chromosomes)]
-        for _ in range(1, self.generations):
+        for i in range(1, self.generations):
             chromosomes = self.getNextGeneration(chromosomes)
             bestChromByGen.append(self.getMostFitChromosome(chromosomes))
         #report most fit chromosome

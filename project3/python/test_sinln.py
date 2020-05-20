@@ -95,6 +95,20 @@ class SinLnTests(unittest.TestCase):
         expectedMutations = self.ga.mutationRate * len(chromosomes)
         self.assertLessEqual(mutatedChromsCount, expectedMutations + variance)
         self.assertGreaterEqual(mutatedChromsCount, expectedMutations - variance)
+    
+    def testFitnessesSum(self):
+        chromosomes = self.ga.createChromosomes()
+        chromosomes = self.ga.setFitnesses(chromosomes)
+        expectedSum = self.ga.getFitnessesSum(copy.deepcopy(chromosomes))
+        actualSum = 0
+        for chrom in chromosomes:
+            actualSum += chrom.fitness
+        self.assertEqual(expectedSum, actualSum)
+    
+    def testSizeOfPopAfterSelect(self):
+        chromosomes = self.ga.createChromosomes()
+        parents = self.ga.select(copy.deepcopy(chromosomes))
+        self.assertEqual(len(parents), len(chromosomes) / 2)
 
 if __name__ == "__main__":
     unittest.main()

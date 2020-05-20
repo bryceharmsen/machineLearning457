@@ -2,8 +2,10 @@ import sys
 import math
 import numpy as np
 import random
+import copy
 from types import SimpleNamespace
 from operator import attrgetter
+import plotter
 import util
 from ga import GA, Chrom, ChromList
 
@@ -23,7 +25,41 @@ class SinLn(GA):
     def select(self, chromosomes: ChromList) -> ChromList:
         #which form of select? rank (no), roulette, tournament?
         
-        pass
+        #Roulette wheel selection (proportionate)
+        #get sum of fitnesses
+        chromosomes = copy.deepcopy(chromosomes)
+        fitnessesSum = self.getFitnessesSum(chromosomes)
+        #sort descending the chroms
+        chromosomes = self.sortChromosomes(chromosomes)
+        #initiate parents list
+        parents = []
+        origNumChroms = len(chromosomes)
+        #while selection list is less than half
+        #the orig. size of the pop.
+        while len(parents) < origNumChroms / 2:
+            #get rand between 0 and sum
+            target = random.uniform(0, fitnessesSum)
+            partialSum = 0
+            selectedParent = chromosomes[0]
+            selectedIdx = 0
+            #while partial sum < rand
+            for i, chrom in enumerate(chromosomes):
+                #add next fitness value to partial sum
+                partialSum += chrom.fitness
+                #selected parent set to this chrom
+                if partialSum >= target:
+                    selectedParent = chrom
+                    selectedIdx = i
+                    break
+            #append selected parent to parents list
+            parents.append(selectedParent)
+            #remove selected parent from chromosomes
+            chromosomes.pop(selectedIdx)
+        #return parents list
+        return parents
+
+    def getFitnessesSum(self, chromosomes: ChromList) -> float:
+        return sum(chrom.fitness for chrom in chromosomes)
 
     def crossover(self, parents: ChromList) -> ChromList:
         #let's stick with single point crossover for now
@@ -33,6 +69,7 @@ class SinLn(GA):
 
         #BASIC
         #shuffle parents
+        parents = copy.deepcopy(parents)
         random.shuffle(parents)
         #create offspring list
         offspring = []
@@ -46,12 +83,15 @@ class SinLn(GA):
                 #randomly decide where to cross over
                 crossoverIdx = int(math.floor(np.random.uniform(0, 2)))
                 #create two offspring based on crossover point
-                offspringA = parentA.alleles[:crossoverIdx] + parentB.alleles[crossoverIdx:]
-                offspringB = parentB.alleles[:crossoverIdx] + parentA.alleles[crossoverIdx:]
+                currOffspring = [
+                    Chrom(parentA.alleles[:crossoverIdx] + parentB.alleles[crossoverIdx:], 0),
+                    Chrom(parentB.alleles[:crossoverIdx] + parentA.alleles[crossoverIdx:], 0)
+                ]
+                currOffspring = self.setFitnesses(currOffspring)
                 #append new offspring to offspring list
-                offspring.extend([offspringA, offspringB])
+                offspring.extend(currOffspring)
         #concatenate parents and offspring lists
-        return parents + offspring
+        return offspring
 
     def mutate(self, offspring: ChromList) -> ChromList:
         #perform bit flip on float?
@@ -63,13 +103,11 @@ class SinLn(GA):
         for chrom in offspring:
             randRate = random.uniform(0, 1)
             if randRate < self.mutationRate:
-                print(f'mutated chrom {chrom.alleles}')
                 idx = np.random.randint(0, 2)
                 if idx == 0:
                     chrom.alleles[idx] = random.uniform(*self.xDomain)
                 else:
                     chrom.alleles[idx] = random.uniform(*self.yDomain)
-                print(f'new alleles: {chrom.alleles}')
         return offspring
 
     def setFitnesses(self, chromosomes: ChromList) -> ChromList:
@@ -85,7 +123,7 @@ class SinLn(GA):
         mostFitChrom = chromosomes[0]
         for chrom in chromosomes:
             if chrom.fitness > mostFitChrom.fitness:
-                mostFitChrom = chrom
+                mostFitChrom = copy.deepcopy(chrom)
         return mostFitChrom
         
 if __name__ == "__main__":
@@ -93,4 +131,11 @@ if __name__ == "__main__":
         print(f'Proper use:\n\tpython3 {sys.argv[0]} PARAM_FILENAME.yaml')
     params = util.getParams(sys.argv[1])
     ga = SinLn(**params)
-    ga.run()
+    bestChromsByGen = ga.run()
+    plotter.plot2d(
+        [chrom.fitness for chrom in bestChromsByGen],
+        'Best Chromosome By Generation',
+        'generation',
+        'z-value',
+        tickFreq=10
+    )
