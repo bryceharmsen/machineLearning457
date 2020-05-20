@@ -5,7 +5,7 @@ import util
 from ga import GA, Chrom, ChromList
 
 class MagicSquare(GA):
-    def __init__(self, generations, populationSize, mutationRate):
+    def __init__(self, generations, populationSize, mutationRate, **kwargs):
         super(MagicSquare, self).__init__(generations, populationSize, mutationRate)
 
     def createChromosomes(self) -> ChromList:
@@ -36,5 +36,5 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print(f'Proper use:\n\tpython3 {sys.argv[0]} PARAM_FILENAME.yaml')
     params = util.getParams(sys.argv[1])
-    ga = MagicSquare(params.generations, params.populationSize, params.mutationRate)
+    ga = MagicSquare(**params)
     ga.run()

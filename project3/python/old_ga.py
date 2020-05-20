@@ -3,7 +3,7 @@ import numpy as np
 #driver imports
 import sys
 import util
-from sinln import Objective
+from sinln import SinLn
 
 class ChromRecord:
     def __init__(self, chromosome, fitness):
@@ -86,6 +86,6 @@ if __name__ == "__main__":
         print(f'Proper use:\n\tpython3 {sys.argv[0]} PARAMS_FILE_NAME')
         exit(1)
     params = util.getParams(sys.argv[1])
-    objective = Objective()
+    objective = SinLn()
     ga = GA(params, objective.f)
     ga.run()
