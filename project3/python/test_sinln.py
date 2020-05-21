@@ -105,6 +105,16 @@ class SinLnTests(unittest.TestCase):
             actualSum += chrom.fitness
         self.assertEqual(expectedSum, actualSum)
     
+    def testAvgFitness(self):
+        chromosomes = self.ga.createChromosomes()
+        chromosomes = self.ga.setFitnesses(chromosomes)
+        expectedAvg = self.ga.getAvgFitness(chromosomes)
+        actualAvg = 0
+        for chrom in chromosomes:
+            actualAvg += chrom.fitness
+        actualAvg /= len(chromosomes)
+        self.assertEqual(expectedAvg, actualAvg)
+    
     def testSizeOfPopAfterSelect(self):
         chromosomes = self.ga.createChromosomes()
         parents = self.ga.select(copy.deepcopy(chromosomes))

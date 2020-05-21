@@ -61,9 +61,6 @@ class SinLn(GA):
         #return parents list
         return parents
 
-    def getFitnessesSum(self, chromosomes: ChromList) -> float:
-        return sum(chrom.fitness for chrom in chromosomes)
-
     def crossover(self, parents: ChromList) -> ChromList:
         #let's stick with single point crossover for now
         #should it just be x from one, y from the other? or
@@ -135,15 +132,21 @@ if __name__ == "__main__":
     params = util.getParams(sys.argv[1])
     ga = SinLn(**params)
     plotter.plot3d(ga.xDomain, ga.yDomain, ga.f)
-    bestChromsByGen = ga.run()
+    bestChromsByGen, avgFitnessByGen = ga.run()
     plotter.plot2dTimeSeries(
         [chrom.fitness for chrom in bestChromsByGen],
-        'Best Chromosome By Generation',
+        'Fitness of Best Chromosome By Generation',
         'generation',
         'z-value'
     )
+    plotter.plot2dTimeSeries(
+        avgFitnessByGen,
+        'Average Fitness By Generation',
+        'generation',
+        'avg. fitness'
+    )
     plotter.plot2dScatter(
-        [chrom.alleles[0] for chrom in bestChromsByGen],
-        [chrom.alleles[1] for chrom in bestChromsByGen]
+        [chrom.alleles for chrom in bestChromsByGen],
+        title='XY Scatter of Best Chromosome By Generation'
     )
     print(f'best chromosomes: {[chrom.alleles for chrom in bestChromsByGen]}')

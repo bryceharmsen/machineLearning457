@@ -35,7 +35,14 @@ def plot2dTimeSeries(values, title='series', xLabel='time', yLabel='values', sav
     plt.pause(2)
     plt.close()
 
-def plot2dScatter(x, y, title='scatter', savePath='.'):
-    plt.scatter(x, y, cmap=cm.jet)
+def plot2dScatter(points, title='scatter', savePath='.'):
+    colors = cm.rainbow(np.linspace(0, 1, len(points)))
+    for pt, c in zip(points, colors):
+        plt.scatter(*pt, color=c)
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.title(title)
     plt.savefig(f'{savePath}/{title}.png')
-    plt.show()
+    plt.show(block=False)
+    plt.pause(2)
+    plt.close()

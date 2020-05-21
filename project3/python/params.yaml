@@ -1,5 +1,5 @@
 populationSize: 1200
-generations: 40
-mutationRate: 0.25
+generations: 50
+mutationRate: 0.1
 xDomain: [3, 10]
 yDomain: [4, 8]

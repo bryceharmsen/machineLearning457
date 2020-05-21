@@ -60,6 +60,12 @@ class GA(metaclass=abc.ABCMeta):
         """Gets most fit chromosome from the list provided."""
         raise NotImplementedError
 
+    def getAvgFitness(self, chromosomes: ChromList) -> Chrom:
+        return self.getFitnessesSum(chromosomes) / len(chromosomes)
+
+    def getFitnessesSum(self, chromosomes: ChromList) -> float:
+        return sum(chrom.fitness for chrom in chromosomes)
+
     def getNextGeneration(self, chromosomes: ChromList) -> ChromList:
         """Gets next generation of chromosomes using implemented select, crossover, and mutate."""
         parents = self.select(chromosomes)
@@ -72,9 +78,11 @@ class GA(metaclass=abc.ABCMeta):
         chromosomes = self.createChromosomes()
         chromosomes = self.setFitnesses(chromosomes)
         bestChromByGen = [self.getMostFitChromosome(chromosomes)]
+        avgFitnessByGen = [self.getAvgFitness(chromosomes)]
         for i in range(1, self.generations):
             chromosomes = self.getNextGeneration(chromosomes)
             bestChromByGen.append(self.getMostFitChromosome(chromosomes))
+            avgFitnessByGen.append(self.getAvgFitness(chromosomes))
         #report most fit chromosome
         #report most fit for each generation
-        return bestChromByGen
+        return bestChromByGen, avgFitnessByGen
