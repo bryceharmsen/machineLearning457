@@ -1,12 +1,9 @@
 #include <iostream>
-#include <thread>
 #include <stdlib.h>
 #include <unistd.h>
 #include <bits/stdc++.h>
-#include <pthread.h>
 #include <stdio.h>
 #include <random>
-#include <mutex>
 #include <cstdlib>
 #include <sys/types.h>
 #include <sys/syscall.h>
@@ -17,80 +14,136 @@
 using namespace std;
 
 
-void selection(){
-
-}
-
-void crossover(){
-
-}
-
 bool operator<(const Individual &ind1, const Individual &ind2){
-  cout << "Comparing" << endl;
   return ind1.fitness < ind2.fitness;
 }
 
-int main(){
+void runGA(int popSize, int n, int numGenerations){
 
-  int popSize = 10;
-  int n = 3;
   srand(time(NULL));
+  int halfPop = popSize / 2;
 
   int currentGen = 0;
-  bool found = false;
 
   vector<Individual> population;
-  //Individual population[popSize];
-  //int m = sizeof(population)/sizeof(population[0].fitness);
 
   // create the population
   for(int i = 0; i < popSize; i++){
-    Individual individual;
+    Individual individual(n);
     population.push_back(individual);
   }
 
-  while(!found){
+  float bestFitGen1 = 0;
+  float worstFitGen1 = 0;
+  float avgFitGen1 = 0;
+  float bestFitGenZ = 0;
+  float worstFitGenZ = 0;
+  float avgFitGenZ = 0;
+  float fitCount = 0;
 
+  while(currentGen < numGenerations){
+
+    float averageFit = 0;
+    if(currentGen == 0){
     // sort the population by fitness score
     sort(population.begin(), population.end());
-
-    cout << "Population sorted" << endl;
-
-    if(population[0].fitness <= 0){
-      found = true;
-      break;
     }
+
+    // get the first gen stats
+
+    if(currentGen == 0){
+      bestFitGen1 = population[0].fitness;
+      worstFitGen1 = population[popSize - 1].fitness;
+      for(int i = 0; i < popSize; i++){
+        fitCount += population[i].fitness;
+      }
+      avgFitGen1 = fitCount / popSize;
+    }
+
 
     vector<Individual> newGen;
 
-    // 10% of fittest population goes to next generation
-    int s = (10*popSize)/100;
-    for(int i = 0; i < s; i++){
-      newGen.push_back(population[i]);
-    }
-    cout << "10% move on" << endl;
 
     // 50% of fittest will mate and make offspring
-    s = (90*popSize) / 100;
+    int s = (50*popSize) / 100;
     for(int i = 0; i<s; i++){
-      int len = population.size();
-      int r = rand() % 50;
-      cout << "random number 1: " << r << endl;
+      int r = rand() % s;
       Individual parent1 = population[r];
-      cout << "Parent 1 selected" << endl;
-      r = rand() % 50;
-      cout << "random number 2: " << r << endl;
+      r = rand() % s;
       Individual parent2 = population[r];
       Individual offspring = parent1.makeBabies(parent2);
+      averageFit += offspring.fitness;
       newGen.push_back(offspring);
-      cout << "Offspring created" << endl;
     }
-    population = newGen;
-    cout << "Generation: " << currentGen << "\t";
-    cout << "Fitness: " << population[0].fitness << "\n";
+
+    // make newGeneration vector with 50% of the best from previous generation
+    vector<Individual> nextGeneration(&population[0], &population[halfPop]);
+    // insert the newGeneration (offspring) into the next generation offspring
+    nextGeneration.insert(nextGeneration.end(), newGen.begin(), newGen.end());
+    // Get the average fitness from the previous generation
+    for(int i = 0; i < halfPop; i++){
+      averageFit += nextGeneration[i].fitness;
+    }
+    //population = nextGeneration;
+    population.assign(nextGeneration.begin(), nextGeneration.end());
+
     currentGen++;
 
+    averageFit /= popSize;
+
+
+    if(currentGen == numGenerations){
+      sort(nextGeneration.begin(), nextGeneration.end());
+      bestFitGenZ = nextGeneration[0].fitness;
+      worstFitGenZ = nextGeneration[popSize - 1].fitness;
+      avgFitGenZ = averageFit;
+      break;
+    }
   }
+  cout << "\t\t";
+  cout << "Population size: " << popSize << "\t\t" << "Size of matrix: " << n << "\t\t" << "Number of Generations: " << numGenerations << endl;
+  cout << "\t\t" << "Generation 1 >>> " << "\t\t" << "Best fitness: " << bestFitGen1 << "\t\t" << "Worst fitness: " << worstFitGen1 <<
+  "\t\t" << "Average fitness: "  << avgFitGen1<< "\t\t" << endl;
+  cout << "\t\t" << "Last Generation >>> " << "\t\t" << "Best fitness: " << bestFitGenZ << "\t\t\t" << "Worst fitness: "  << worstFitGenZ <<
+  "\t\t" << "Average fitness: "  << avgFitGenZ<< "\t\t" << endl;
+  cout << endl;
+
+
+
+}
+
+
+int main(){
+
+  int testPopulationSize[] = {100, 1000, 2000};
+  int testSizeMatrix[] = {3, 9, 10};
+  int testGenerations[] = {2000, 1000, 100};
+
+  //runGA(1000, 4, 1000);
+
+
+  // same population size, different size matrix and generations
+  for(int i = 0; i < 2; i++){
+    for(int j = 0; j < 2; j++){
+      runGA(testPopulationSize[i], testSizeMatrix[j], testGenerations[j]);
+    }
+  }
+
+  // same size matrix, different size populations and # of generations
+  for(int i = 0; i < 2; i++){
+    for(int j = 0; j < 2; j++){
+      runGA(testPopulationSize[j], testSizeMatrix[i], testGenerations[j]);
+    }
+  }
+
+  // same generation number, different size matrix and populationsize
+  for(int i = 0; i < 2; i++){
+    for(int j = 0; j < 2; j++){
+      runGA(testPopulationSize[j], testSizeMatrix[j], testGenerations[i]);
+    }
+  }
+  //*/
+
 
 
 
