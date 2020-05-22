@@ -8,7 +8,7 @@ import util
 import copy
 
 NUM_ALLELES = 2
-OFFSPRING_MULTIPLIER = 2
+OFFSPRING_MULTIPLIER = 1
 VARIANCE_PERCENTAGE = 0.05
 
 class SinLnTests(unittest.TestCase):
@@ -78,9 +78,9 @@ class SinLnTests(unittest.TestCase):
         self.assertIs(isSorted, True)
 
     def testSizeOfPopAfterCrossover(self):
-        chromosomes = self.ga.createChromosomes()
-        nextGenChroms = self.ga.crossover(chromosomes)
-        self.assertEqual(len(nextGenChroms), len(chromosomes) * OFFSPRING_MULTIPLIER)
+        parents = self.ga.createChromosomes()
+        offspring = self.ga.crossover(parents)
+        self.assertEqual(len(offspring), len(parents) * OFFSPRING_MULTIPLIER)
 
     def testMutateNumberOfChanges(self):
         chromosomes = self.ga.createChromosomes()
